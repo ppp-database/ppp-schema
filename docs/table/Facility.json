@@ -128,7 +128,7 @@
       "入居する建物内の位置。方書にフロア情報も必要な場合に登録"
     ],
     [
-      "開館時間",
+      "開館時間帯",
       "openingHours",
       "[OpeningHours](https://ppp-database.org/spec/parts/OpeningHours/)",
       "*",

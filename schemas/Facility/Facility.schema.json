@@ -91,7 +91,7 @@
     },
     "openingHours": {
       "$ref": "../../parts/OpeningHours.schema.json#/$defs/OpeningHours",
-      "title": "開館時間",
+      "title": "開館時間帯",
       "description": "曜日ごとの開館閉館時刻の配列。"
     },
     "openingHoursRemarks": {

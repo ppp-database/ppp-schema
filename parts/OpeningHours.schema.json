@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ppp-database.org/spec/parts/OpeningHours.schema.json",
   "title": "OpeningHours",
-  "description": "開館時間を表すデータパーツ。https://ppp-database.org/spec/parts/OpeningHours/ 参照。OpeningHoursValueはvalueの中身のみ(他の部品にネストする場合に使用)、OpeningHoursはtype+value丸ごと(トップレベル属性として使う場合に使用)。",
+  "description": "開館時間帯を表すデータパーツ。https://ppp-database.org/spec/parts/OpeningHours/ 参照。OpeningHoursValueはvalueの中身のみ(他の部品にネストする場合に使用)、OpeningHoursはtype+value丸ごと(トップレベル属性として使う場合に使用)。",
   "$defs": {
     "OpeningHoursValue": {
       "type": "array",
@@ -15,7 +15,7 @@
         "type": { "const": "OpeningHours" },
         "value": {
           "$ref": "#/$defs/OpeningHoursValue",
-          "title": "開館時間",
+          "title": "開館時間帯",
           "description": "サービスを提供する時間帯を表す文字列のリストです。リストの中の各要素の文字列は曜日、開館時刻、閉館時刻を以下の形式で表現します。\n　“<曜日>(空白)<開始時刻>-<終了時刻>”\n曜日はMo,Tu,We,Th,Fr,Sa,Suの2文字で表現し、カンマ区切りで複数の曜日を並べたり、連続する曜日をハイフンで繋いで範囲指定したりできます。例えば、“Mo-Fr 09:00-17:00”など。(空白)は半角のブランク文字です。\n開始時刻・終了時刻はHH:MMの24時間形式で表現します。開始時刻が終了時刻より大きい場合は、夜間を通じて開館していると解釈します。"
         }
       },

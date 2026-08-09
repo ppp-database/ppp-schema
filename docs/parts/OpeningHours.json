@@ -21,7 +21,7 @@
       ],
       "rows": [
         [
-          "開館時間",
+          "開館時間帯",
           "openingHours",
           "[OpeningHours](https://ppp-database.org/spec/parts/OpeningHours/)",
           "*",

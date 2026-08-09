@@ -293,7 +293,7 @@
       "additionalProperties": false
     },
     "openingHours": {
-      "title": "開館時間",
+      "title": "開館時間帯",
       "description": "曜日ごとの開館閉館時刻の配列。",
       "type": "object",
       "x-suggested-name": "openingHours",
@@ -302,7 +302,7 @@
           "const": "OpeningHours"
         },
         "value": {
-          "title": "開館時間",
+          "title": "開館時間帯",
           "description": "サービスを提供する時間帯を表す文字列のリストです。リストの中の各要素の文字列は曜日、開館時刻、閉館時刻を以下の形式で表現します。\n　“<曜日>(空白)<開始時刻>-<終了時刻>”\n曜日はMo,Tu,We,Th,Fr,Sa,Suの2文字で表現し、カンマ区切りで複数の曜日を並べたり、連続する曜日をハイフンで繋いで範囲指定したりできます。例えば、“Mo-Fr 09:00-17:00”など。(空白)は半角のブランク文字です。\n開始時刻・終了時刻はHH:MMの24時間形式で表現します。開始時刻が終了時刻より大きい場合は、夜間を通じて開館していると解釈します。",
           "type": "array",
           "items": {
