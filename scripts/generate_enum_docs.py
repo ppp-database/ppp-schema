@@ -1,5 +1,5 @@
 """enums/{Name}.schema.json の各$defsから
-WordPress埋め込み用の表データJSON (docs/enum/{Name}.json) を生成する。
+WordPress埋め込み用の表データJSON (docs/enums/{Name}.json) を生成する。
 
 出力フォーマット:
     {
@@ -29,7 +29,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 ENUMS_DIR = REPO_ROOT / "enums"
-DOCS_DIR = REPO_ROOT / "docs" / "enum"
+DOCS_DIR = REPO_ROOT / "docs" / "enums"
 
 INDENT = "　"  # 全角スペース。入れ子の深さぶん繰り返す
 

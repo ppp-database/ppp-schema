@@ -1,5 +1,5 @@
 """JSON Schema (schemas/{Model}/{Model}.schema.json) から
-WordPress埋め込み用の表データJSON (docs/table/{Model}.json) を生成する。
+WordPress埋め込み用の表データJSON (docs/tables/{Model}.json) を生成する。
 
 出力フォーマット（ppp-datamodel-embed プラグインの契約と一致させること）:
     {"model": "...", "columns": [...], "rows": [[...], ...]}
@@ -18,7 +18,7 @@ from refresolve import load_and_expand
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCHEMAS_DIR = REPO_ROOT / "schemas"
-DOCS_DIR = REPO_ROOT / "docs" / "table"
+DOCS_DIR = REPO_ROOT / "docs" / "tables"
 
 COLUMNS = ["呼称", "Attribute name", "type", "回数", "説明"]
 INDENT = "　"  # 全角スペース。入れ子の深さぶん繰り返す
