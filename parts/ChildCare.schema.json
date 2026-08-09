@@ -17,6 +17,7 @@
             "childCareFee": {
               "title": "料金",
               "$ref": "PriceSpecification.schema.json#/$defs/PriceSpecificationValue",
+              "x-partType": "PriceSpecification",
               "description": "有料の場合の料金"
             },
             "childCareFeeRemarks": { "title": "料金備考", "type": "string", "description": "料金の備考" },
@@ -26,6 +27,7 @@
             "childCareOpeningHours": {
               "title": "対応時間帯",
               "$ref": "OpeningHours.schema.json#/$defs/OpeningHoursValue",
+              "x-partType": "OpeningHours",
               "description": "対応時間帯。施設等のサービス時間帯と異なる場合にOpeningHoursの形式で登録する"
             },
             "nursery": { "title": "授乳室", "type": "boolean", "description": "授乳室の有無" },

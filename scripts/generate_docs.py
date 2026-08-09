@@ -216,12 +216,19 @@ def analyze_nested(schema: dict):
 
         if "x-partType" in schema:
             # x-partTypeが配列フィールド自身(items内ではなく"type":"array"と
-            # 同階層)に付与されているケース。既にそのページで説明済みのため
-            # サブ構造の展開は行わない(x-refTypeより優先度が高い、より具体的な
-            # シグナルなので先にチェックする)。
+            # 同階層)に付与されているケース。items内に付与する場合(下記)とは
+            # 意味が異なり、「配列の各要素がXである」ではなく「この配列全体が
+            # 既にX自身として定義済み」であることを示す(例: childCareFeeは
+            # PriceSpecificationValue自体が配列だが、childCareFee自身が
+            # PriceSpecificationという概念そのものであり、Xの配列ではない)。
+            # そのためArray()で包まずlinkify_part()の結果をそのまま使う
+            # (x-suggested-name付き$defの自己行と同じ考え方)。回数(occurrence)
+            # 列には引き続き配列としての実際のカーディナリティを表示する。
+            # 既にそのページで説明済みのためサブ構造の展開は行わない
+            # (x-refTypeより優先度が高い、より具体的なシグナルなので先にチェックする)。
             max_items = schema.get("maxItems")
             occurrence = f"*(最大{max_items})" if max_items else "*"
-            return f"Array({linkify_part(schema['x-partType'])})", occurrence, []
+            return linkify_part(schema["x-partType"]), occurrence, []
 
         if "x-refType" in schema:
             # x-refTypeが配列フィールド自身(items内ではなく"type":"array"と

@@ -814,6 +814,7 @@
             },
             "childCareFee": {
               "title": "料金",
+              "x-partType": "PriceSpecification",
               "description": "有料の場合の料金",
               "type": "array",
               "x-suggested-name": "priceSpecification",
@@ -863,6 +864,7 @@
             },
             "childCareOpeningHours": {
               "title": "対応時間帯",
+              "x-partType": "OpeningHours",
               "description": "対応時間帯。施設等のサービス時間帯と異なる場合にOpeningHoursの形式で登録する",
               "type": "array",
               "items": {

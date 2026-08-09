@@ -27,30 +27,9 @@
         [
           "∟料金",
           "∟childCareFee",
-          "Array(StructuredValue)",
+          "[PriceSpecification](https://ppp-database.org/spec/parts/PriceSpecification/)",
           "*",
           "有料の場合の料金"
-        ],
-        [
-          "　∟単位",
-          "　∟unitText",
-          "Text",
-          "1",
-          "測定単位を示す文字列またはテキスト。“1時間あたり料金”などと記載します。"
-        ],
-        [
-          "　∟価格",
-          "　∟price",
-          "Number",
-          "1",
-          "価格を数値で示します"
-        ],
-        [
-          "　∟通貨",
-          "　∟priceCurrency",
-          "Text",
-          "1",
-          "支払い可能な通貨を示します。形式はISO4217です。日本円は“JPY”, 米ドルは“USD”です"
         ],
         [
           "∟料金備考",
@@ -83,7 +62,7 @@
         [
           "∟対応時間帯",
           "∟childCareOpeningHours",
-          "Array(Text)",
+          "[OpeningHours](https://ppp-database.org/spec/parts/OpeningHours/)",
           "*",
           "対応時間帯。施設等のサービス時間帯と異なる場合にOpeningHoursの形式で登録する"
         ],
