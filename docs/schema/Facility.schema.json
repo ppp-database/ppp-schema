@@ -829,12 +829,12 @@
                   "price": {
                     "title": "価格",
                     "type": "number",
-                    "description": "価格を数値で示します"
+                    "description": "価格を数値で示します。必須項目です。"
                   },
                   "priceCurrency": {
                     "title": "通貨",
                     "type": "string",
-                    "description": "支払い可能な通貨を示します。形式はISO4217です。日本円は“JPY”, 米ドルは“USD”です"
+                    "description": "支払い可能な通貨を示します。形式はISO4217です。日本円は“JPY”, 米ドルは“USD”です。"
                   }
                 },
                 "required": [

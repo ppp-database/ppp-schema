@@ -11,8 +11,8 @@
         "type": "object",
         "properties": {
           "unitText": { "title": "単位", "type": "string", "description": "測定単位を示す文字列またはテキスト。“1時間あたり料金”などと記載します。" },
-          "price": { "title": "価格", "type": "number", "description": "価格を数値で示します" },
-          "priceCurrency": { "title": "通貨", "type": "string", "description": "支払い可能な通貨を示します。形式はISO4217です。日本円は“JPY”, 米ドルは“USD”です" }
+          "price": { "title": "価格", "type": "number", "description": "価格を数値で示します。必須項目です。" },
+          "priceCurrency": { "title": "通貨", "type": "string", "description": "支払い可能な通貨を示します。形式はISO4217です。日本円は“JPY”, 米ドルは“USD”です。" }
         },
         "required": ["price"]
       }
