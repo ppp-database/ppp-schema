@@ -691,7 +691,7 @@
           "title": "アクセシビリティー",
           "properties": {
             "wheelchairAccessible": {
-              "title": "車椅子使用可否",
+              "title": "車椅子可",
               "type": "boolean",
               "description": "車椅子の使用可"
             },
@@ -701,12 +701,12 @@
               "description": "車椅子貸出有り"
             },
             "caneRental": {
-              "title": "杖貸出",
+              "title": "ツエ貸出",
               "type": "boolean",
-              "description": "杖貸出有り"
+              "description": "ツエ貸出有り"
             },
             "multipurposeToilet": {
-              "title": "多目的トイレ",
+              "title": "バリアフリートイレ",
               "type": "boolean",
               "description": "多目的トイレ有り"
             },
@@ -731,12 +731,12 @@
               "description": "点字ブロック等の移動支援有り"
             },
             "brailleAndReadingAssistance": {
-              "title": "点字・読み上げ支援",
+              "title": "点字や読上による支援",
               "type": "boolean",
               "description": "点字や読上による支援有り"
             },
             "accompaniedByGuideDogsAndServiceDogs": {
-              "title": "補助犬同伴可否",
+              "title": "盲導犬・介助犬・聴導犬同伴",
               "type": "boolean",
               "description": "盲導犬・介助犬・聴導犬などの同伴可"
             },

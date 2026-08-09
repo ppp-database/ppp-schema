@@ -18,7 +18,7 @@
           ""
         ],
         [
-          "∟車椅子使用可否",
+          "∟車椅子可",
           "∟wheelchairAccessible",
           "Boolean",
           "1",
@@ -32,14 +32,14 @@
           "車椅子貸出有り"
         ],
         [
-          "∟杖貸出",
+          "∟ツエ貸出",
           "∟caneRental",
           "Boolean",
           "1",
-          "杖貸出有り"
+          "ツエ貸出有り"
         ],
         [
-          "∟多目的トイレ",
+          "∟バリアフリートイレ",
           "∟multipurposeToilet",
           "Boolean",
           "1",
@@ -74,14 +74,14 @@
           "点字ブロック等の移動支援有り"
         ],
         [
-          "∟点字・読み上げ支援",
+          "∟点字や読上による支援",
           "∟brailleAndReadingAssistance",
           "Boolean",
           "1",
           "点字や読上による支援有り"
         ],
         [
-          "∟補助犬同伴可否",
+          "∟盲導犬・介助犬・聴導犬同伴",
           "∟accompaniedByGuideDogsAndServiceDogs",
           "Boolean",
           "1",
