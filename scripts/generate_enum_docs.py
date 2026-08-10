@@ -6,6 +6,7 @@ WordPress埋め込み用の表データJSON (docs/enums/{Name}.json) を生成�
       "source_file": "BuildingComponent",
       "defs": {
         "BuildingPartsEnum": {"columns": [...], "rows": [[...], ...], "note": "..."},
+        "KitchenEquipmentEnum": {"level_count": 3, "rows": [[...], ...], "note": "..."},
         ...
       }
     }
@@ -17,10 +18,17 @@ BuildingComponent.schema.jsonの10カテゴリ+統合版)でも、$defs全てを
 実害は無いため、生成側で除外する判定は行わない。
 
 x-enumDescriptionsの値の形によって表の形式を自動判定する:
-    文字列                          -> 用語/定義の2列
-    オブジェクト(x-enumDescriptionLabelsに対応するキー) -> 用語+各フィールドの列
-    オブジェクト(上記に該当しない、カテゴリ等のネスト)   -> 再帰的に平坦化し、
-                                       グループ見出し行+インデント付き用語/定義の2列
+    文字列                                          -> 用語/定義の2列("columns"付き)
+    オブジェクト(x-enumDescriptionLabelsに対応するキー) -> 用語+各フィールドの列("columns"付き)
+    上記以外(カテゴリ等のネスト、または値がリスト)        -> 階層形式。再帰的に平坦化し、
+        各行は「レベル1, レベル2, ..., レベルN, 説明1, 説明2, ...」というフラットな
+        配列にする(1行=1用語)。列名はenumごとにばらつきが大きいため、"columns"は
+        出力せず"level_count"(先頭から何個が階層レベルか。残りは説明の列数)のみ
+        出力する。ショートコード側のcolumns属性で列名を指定する運用とする。
+        階層のキーが""(分類用語なし等のプレースホルダ)の場合もそのままレベル値と
+        して残す(WordPress側で空セルを隣列とcolspan結合する判定に使うため)。
+        説明の値が文字列なら列1つ、配列なら要素数ぶんの複数列になる(1つのenum内で
+        全用語が同じ列数を持つ前提)。
 x-enumDescription(単数形、enum全体への注記)がある場合はrowsとは別にnoteとして格納する。
 """
 import json
@@ -31,15 +39,6 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 ENUMS_DIR = REPO_ROOT / "enums"
 DOCS_DIR = REPO_ROOT / "docs" / "enums"
 
-INDENT = "　"  # 全角スペース。入れ子の深さぶん繰り返す
-
-
-def indent_prefix(depth: int) -> str:
-    """深さに応じたインデントを返す。直前の1つだけ枝記号「∟」にする。"""
-    if depth <= 0:
-        return ""
-    return INDENT * (depth - 1) + "∟"
-
 
 def classify(descriptions: dict, labels: dict | None) -> str:
     """x-enumDescriptionsの値の形を判定する。"""
@@ -49,7 +48,11 @@ def classify(descriptions: dict, labels: dict | None) -> str:
     if isinstance(sample, dict):
         if labels and set(sample.keys()) <= set(labels.keys()):
             return "structured"
-        return "nested"
+        return "hierarchical"
+    if isinstance(sample, list):
+        # 階層を持たず、説明だけが複数項目に分かれているケース。
+        # flatten_hierarchy()的には「用語自身が唯一のレベル」として扱う。
+        return "hierarchical"
     return "empty"
 
 
@@ -66,23 +69,40 @@ def build_structured_rows(descriptions: dict, labels: dict) -> tuple:
     return columns, rows
 
 
-def flatten_nested(node: dict, depth: int = 0) -> list:
-    """再帰的にネストしたx-enumDescriptionsを(インデント付き用語, 定義)の行に変換する。
+def flatten_hierarchy(node: dict, path: tuple = ()) -> list:
+    """再帰的に階層をたどり、末端(文字列またはリスト)に到達したら
+    (パスのタプル, 末端の値)のペアをリストとして返す。
 
-    キーが""(分類用語なしのプレースホルダ)の場合は見出し行を作らず、
-    同じ深さのまま子を展開する。
+    パスの長さ(階層の深さ)と末端の値の型(str=1個/list=N個)を独立に
+    追跡することで、呼び出し側で「レベル数」と「説明の列数」を正しく
+    分離できるようにする(行の長さだけからは両者を区別できないため)。
     """
-    rows = []
+    results = []
     for key, value in node.items():
-        if isinstance(value, str):
-            rows.append([f"{indent_prefix(depth)}{key}", value])
-        elif isinstance(value, dict):
-            if key == "":
-                rows.extend(flatten_nested(value, depth))
-            else:
-                rows.append([f"{indent_prefix(depth)}{key}", ""])
-                rows.extend(flatten_nested(value, depth + 1))
-    return rows
+        current_path = path + (key,)
+        if isinstance(value, dict):
+            results.extend(flatten_hierarchy(value, current_path))
+        else:
+            results.append((current_path, value))
+    return results
+
+
+def build_hierarchical_table(descriptions: dict) -> dict:
+    leaves = flatten_hierarchy(descriptions)
+    if not leaves:
+        return {"level_count": 0, "rows": []}
+
+    level_count = len(leaves[0][0])
+    rows = []
+    for path, value in leaves:
+        row = list(path)
+        if isinstance(value, list):
+            row.extend(value)
+        else:
+            row.append(value)
+        rows.append(row)
+
+    return {"level_count": level_count, "rows": rows}
 
 
 def build_def_table(def_schema: dict) -> dict:
@@ -102,13 +122,16 @@ def build_def_table(def_schema: dict) -> dict:
     if shape == "flat":
         columns = ["用語", "定義"]
         rows = build_flat_rows(descriptions)
-    elif shape == "structured":
+        return {"columns": columns, "rows": rows, "note": note}
+    if shape == "structured":
         columns, rows = build_structured_rows(descriptions, labels)
-    else:  # nested
-        columns = ["用語", "定義"]
-        rows = flatten_nested(descriptions)
+        return {"columns": columns, "rows": rows, "note": note}
 
-    return {"columns": columns, "rows": rows, "note": note}
+    # hierarchical: 列名はショートコード側のcolumns属性で与える運用のため、
+    # ここでは"columns"を出力せず"level_count"のみ出力する。
+    result = build_hierarchical_table(descriptions)
+    result["note"] = note
+    return result
 
 
 def main() -> None:
