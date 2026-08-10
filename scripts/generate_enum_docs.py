@@ -5,8 +5,8 @@ WordPress埋め込み用の表データJSON (docs/enums/{Name}.json) を生成�
     {
       "source_file": "BuildingComponent",
       "defs": {
-        "BuildingPartsEnum": {"columns": [...], "rows": [[...], ...], "note": "..."},
-        "KitchenEquipmentEnum": {"level_count": 3, "rows": [[...], ...], "note": "..."},
+        "BuildingPartsEnum": {"columns": [...], "rows": [[...], ...]},
+        "KitchenEquipmentEnum": {"level_count": 3, "rows": [[...], ...]},
         ...
       }
     }
@@ -29,7 +29,10 @@ x-enumDescriptionsの値の形によって表の形式を自動判定する:
         して残す(WordPress側で空セルを隣列とcolspan結合する判定に使うため)。
         説明の値が文字列なら列1つ、配列なら要素数ぶんの複数列になる(1つのenum内で
         全用語が同じ列数を持つ前提)。
-x-enumDescription(単数形、enum全体への注記)がある場合はrowsとは別にnoteとして格納する。
+x-enumDescription(単数形、enum全体への注記)は、x-enumDescriptionsが無い場合
+(enum配列のみ、または全体注記だけで説明しているケース)に限りnoteとして格納する。
+x-enumDescriptionsがある場合はx-enumDescriptionsを優先し、x-enumDescriptionは
+表示上無視する(noteを出力しない)。
 """
 import json
 import sys
@@ -106,14 +109,15 @@ def build_hierarchical_table(descriptions: dict) -> dict:
 
 
 def build_def_table(def_schema: dict) -> dict:
-    note = def_schema.get("x-enumDescription")
     descriptions = def_schema.get("x-enumDescriptions")
     labels = def_schema.get("x-enumDescriptionLabels")
 
     if not descriptions:
-        # x-enumDescriptions(値ごとの説明)が無い場合、enum配列があればそれを
-        # そのまま行として出力する(例: LandUseZoneの様にx-enumDescription
-        # (単数形、全体注記)だけで全用語を説明しているケース)。
+        # x-enumDescriptions(値ごとの説明)が無い場合のみ、x-enumDescription
+        # (単数形、全体注記)を表の上の注記として使う(例: LandUseZoneの様に
+        # 全体注記だけで全用語を説明しているケース)。両方存在する場合は
+        # x-enumDescriptionsを優先し、x-enumDescriptionは表示上無視する。
+        note = def_schema.get("x-enumDescription")
         enum_values = def_schema.get("enum", [])
         rows = [[term, ""] for term in enum_values]
         return {"columns": ["用語", "定義"], "rows": rows, "note": note}
@@ -122,16 +126,14 @@ def build_def_table(def_schema: dict) -> dict:
     if shape == "flat":
         columns = ["用語", "定義"]
         rows = build_flat_rows(descriptions)
-        return {"columns": columns, "rows": rows, "note": note}
+        return {"columns": columns, "rows": rows}
     if shape == "structured":
         columns, rows = build_structured_rows(descriptions, labels)
-        return {"columns": columns, "rows": rows, "note": note}
+        return {"columns": columns, "rows": rows}
 
     # hierarchical: 列名はショートコード側のcolumns属性で与える運用のため、
     # ここでは"columns"を出力せず"level_count"のみ出力する。
-    result = build_hierarchical_table(descriptions)
-    result["note"] = note
-    return result
+    return build_hierarchical_table(descriptions)
 
 
 def main() -> None:

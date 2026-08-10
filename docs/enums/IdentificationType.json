@@ -15,8 +15,7 @@
           "自治体コード",
           "全国地方公共団体コード(自治体コード)であることを示す。identificationには、数字からなる6桁のASCII文字列(半角文字)で格納する。"
         ]
-      ],
-      "note": null
+      ]
     },
     "RealEstateIdentificationType": {
       "columns": [
@@ -28,8 +27,7 @@
           "不動産ID",
           "”ID”はASCIIの英大文字(半角英大文字)。不動産IDについては、「[不動産IDルールガイドライン](https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/content/001594268.pdf)」を参照。形式は<不動産番号>”-“<特定コード>の形式。不動産番号は13桁、特定コードは4桁。いずれもASCIIの英数字。不動産番号と特定コードの間のセパレータはハイフンに統一する。他の文字は使ってはならない"
         ]
-      ],
-      "note": null
+      ]
     }
   }
 }

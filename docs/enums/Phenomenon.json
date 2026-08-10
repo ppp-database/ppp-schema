@@ -24,8 +24,7 @@
           "備品発注",
           "備品の欠品が発生。または在庫が不十分"
         ]
-      ],
-      "note": null
+      ]
     },
     "GeneralPhenomenaEnum": {
       "level_count": 2,
@@ -185,8 +184,7 @@
           "沈下",
           "建物・地盤・設備などがその重み・地下水の変化・強度不足などにより沈み込む現象"
         ]
-      ],
-      "note": null
+      ]
     },
     "BuildingPhenomenaEnum": {
       "level_count": 2,
@@ -261,8 +259,7 @@
           "ふきこみ",
           "風が吹き込む状況。雨水・雪・枯葉等の異物を伴う場合を含む"
         ]
-      ],
-      "note": null
+      ]
     },
     "ExteriorPhenomenaEnum": {
       "level_count": 2,
@@ -287,8 +284,7 @@
           "動物等侵入",
           "動物・小動物・虫などの自然物の外部からの侵入。人の侵入は含まない。また、害虫やハチなどの巣が形成されている場合は”害虫発生”､”蜂の巣発生”となる"
         ]
-      ],
-      "note": null
+      ]
     },
     "ElectricalPhenomenaEnum": {
       "level_count": 2,
@@ -378,8 +374,7 @@
           "発電不良",
           "発電設備において、所定の発電量が得られない"
         ]
-      ],
-      "note": null
+      ]
     },
     "MechanicalPhenomenaEnum": {
       "level_count": 2,
@@ -544,8 +539,7 @@
           "オーバーフロー",
           "容器から液体が溢れ出ている状態"
         ]
-      ],
-      "note": null
+      ]
     },
     "ChecklistAndOtherPhenomenaEnum": {
       "level_count": 2,
@@ -575,8 +569,7 @@
           "その他",
           "その他"
         ]
-      ],
-      "note": null
+      ]
     },
     "PhenomenonEnum": {
       "level_count": 3,
@@ -1223,8 +1216,7 @@
           "その他",
           "その他"
         ]
-      ],
-      "note": null
+      ]
     }
   }
 }

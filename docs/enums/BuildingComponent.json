@@ -244,8 +244,7 @@
           "棚",
           ""
         ]
-      ],
-      "note": null
+      ]
     },
     "OutdoorPartsEnum": {
       "level_count": 3,
@@ -310,8 +309,7 @@
           "その他建物外",
           "これを選択した時には、具体的な部位は文で補足として追記する必要があります"
         ]
-      ],
-      "note": null
+      ]
     },
     "ElectricalEquipmentEnum": {
       "level_count": 3,
@@ -466,8 +464,7 @@
           "電気配線",
           "電力を供給する配線"
         ]
-      ],
-      "note": null
+      ]
     },
     "MechanicalEquipmentEnum": {
       "level_count": 3,
@@ -814,8 +811,7 @@
           "蒸気配管",
           "蒸気設備における、蒸気と凝縮した液体としての水を輸送する配管"
         ]
-      ],
-      "note": null
+      ]
     },
     "DisasterPreventionEquipmentEnum": {
       "level_count": 3,
@@ -916,8 +912,7 @@
           "誘導灯",
           ""
         ]
-      ],
-      "note": null
+      ]
     },
     "ConveyingEquipmentEnum": {
       "level_count": 3,
@@ -982,8 +977,7 @@
           "簡易リフト",
           "労働安全衛生法施行令(抄)第一条に規定されている。かごの水平投影面積が1平方メートル以下で、または、天井の高さが1.2メートル以下のもの"
         ]
-      ],
-      "note": null
+      ]
     },
     "KitchenEquipmentEnum": {
       "level_count": 3,
@@ -1768,8 +1762,7 @@
           "パルパーエストラシステム",
           "配管やU字溝(トラフ)に水流と共に流れてきた廃棄物を一定の大きさに粉砕してもの。"
         ]
-      ],
-      "note": null
+      ]
     },
     "GasEquipmentEnum": {
       "level_count": 3,
@@ -1798,8 +1791,7 @@
           "ガス器具",
           "給湯室等に配置されているガス器具一般。厨房機器を除きます"
         ]
-      ],
-      "note": null
+      ]
     },
     "ObservationTargetEnum": {
       "level_count": 3,
@@ -1828,8 +1820,7 @@
           "(食品)",
           "給食センター等では各種食品の中心温度などを測定する事が想定されます。必要な場合は事務局に連絡をしてください。"
         ]
-      ],
-      "note": null
+      ]
     },
     "OtherEquipmentEnum": {
       "level_count": 3,
@@ -1906,8 +1897,7 @@
           "その他設備",
           "これを選択した時には、具体的な部位は文で補足として追記する必要があります"
         ]
-      ],
-      "note": null
+      ]
     },
     "BuildingComponentEnum": {
       "level_count": 4,
@@ -4068,8 +4058,7 @@
           "その他設備",
           "これを選択した時には、具体的な部位は文で補足として追記する必要があります"
         ]
-      ],
-      "note": null
+      ]
     }
   }
 }
