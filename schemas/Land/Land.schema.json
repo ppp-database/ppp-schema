@@ -53,33 +53,10 @@
         "value": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "田",
-              "畑",
-              "山林",
-              "水面",
-              "その他自然地",
-              "住宅用地",
-              "商業用地",
-              "工業用地",
-              "農林漁業施設用地",
-              "公益施設用地",
-              "道路用地",
-              "交通施設用地",
-              "公共空地",
-              "その他公的施設用地",
-              "その他の空地①",
-              "その他空地②",
-              "その他の空地③",
-              "その他の空地④",
-              "不明",
-              "可住地",
-              "非可住地",
-              "農地",
-              "宅地",
-              "道路・鉄軌道敷",
-              "空地"
+            "oneOf": [
+              { "$ref": "../../enums/LandUsage.schema.json#/$defs/LandUsageEnum" },
+              { "$ref": "../../enums/LandUsage.schema.json#/$defs/LandUsageHabitabilityEnum" },
+              { "$ref": "../../enums/LandUsage.schema.json#/$defs/LandUsageAggregateEnum" }
             ]
           }
         }
