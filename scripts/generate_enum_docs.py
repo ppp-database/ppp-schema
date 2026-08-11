@@ -30,9 +30,13 @@ x-enumDescriptionsの値の形によって表の形式を自動判定する:
         説明の値が文字列なら列1つ、配列なら要素数ぶんの複数列になる(1つのenum内で
         全用語が同じ列数を持つ前提)。
 x-enumDescription(単数形、enum全体への注記)は、x-enumDescriptionsが無い場合
-(enum配列のみ、または全体注記だけで説明しているケース)に限りnoteとして格納する。
+に限り使う(例: LandUseZoneの様に全体注記だけで全用語を説明しているケース)。
+この場合、1行目を[用語, 注記]のフル行、2行目以降を[用語]のみの短い行にする
+ことで、ppp_render_datamodel_table()側の既存のrowspanロジック(フル行の後に
+続く短い行の分だけ最終列をrowspan)がそのまま使え、注記が全行にまたがる1つの
+セルとして表示される("note"というフィールドは出力しない)。
 x-enumDescriptionsがある場合はx-enumDescriptionsを優先し、x-enumDescriptionは
-表示上無視する(noteを出力しない)。
+表示上無視する。
 """
 import json
 import sys
@@ -114,13 +118,21 @@ def build_def_table(def_schema: dict) -> dict:
 
     if not descriptions:
         # x-enumDescriptions(値ごとの説明)が無い場合のみ、x-enumDescription
-        # (単数形、全体注記)を表の上の注記として使う(例: LandUseZoneの様に
-        # 全体注記だけで全用語を説明しているケース)。両方存在する場合は
-        # x-enumDescriptionsを優先し、x-enumDescriptionは表示上無視する。
+        # (単数形、全体注記)を使う(例: LandUseZoneの様に全体注記だけで
+        # 全用語を説明しているケース)。両方存在する場合はx-enumDescriptions
+        # を優先し、x-enumDescriptionは表示上無視する。
+        # 表示は「表の上に別枠のnote」ではなく、元表の構成(1行目は
+        # [用語, 注記]のフル行、2行目以降は[用語]のみの短い行)に合わせる。
+        # ppp_render_datamodel_table()の既存ロジック(フル行の後に続く
+        # 短い行の分だけ最終列をrowspanする)がそのまま使えるため、
+        # 注記は全行にまたがる1つのセルとして表示される。
         note = def_schema.get("x-enumDescription")
         enum_values = def_schema.get("enum", [])
-        rows = [[term, ""] for term in enum_values]
-        return {"columns": ["用語", "定義"], "rows": rows, "note": note}
+        if note and enum_values:
+            rows = [[enum_values[0], note]] + [[term] for term in enum_values[1:]]
+        else:
+            rows = [[term, ""] for term in enum_values]
+        return {"columns": ["用語", "定義"], "rows": rows}
 
     shape = classify(descriptions, labels)
     if shape == "flat":
