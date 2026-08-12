@@ -9,8 +9,8 @@
         "自治体コード"
       ],
       "x-enumDescriptions": {
-        "法人番号": "法人番号であることを示します。identificationには、数字からなる13桁のASCII文字列([GIF](https://ppp-database.org/howtouse/terms-g/#gif)の半角と同義)で格納します。",
-        "自治体コード": "全国地方公共団体コード(自治体コード)であることを示します。identificationには、数字からなる6桁のASCII文字列(半角文字)で格納します。"
+        "法人番号": "法人番号であることを示します。対となるID(identification)には、数字からなる13桁のASCII文字列([GIF](https://ppp-database.org/howtouse/terms-g/#gif)の半角と同義)で格納します。",
+        "自治体コード": "全国地方公共団体コード(自治体コード)であることを示します。対となるID(identification)には、数字からなる6桁のASCII文字列(半角文字)で格納します。"
       }
     },
     "RealEstateIdentificationType": {
