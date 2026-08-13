@@ -13,9 +13,10 @@ WordPress埋め込み用の表データJSON (docs/enums/{Name}.json) を生成�
 
 1つのenums/{Name}.schema.jsonファイルに複数の$defsが入っている場合(例:
 BuildingComponent.schema.jsonの10カテゴリ+統合版)でも、$defs全てをそのまま
-出力する。モデルのバリデーション専用で対応するWebページを持たない統合$def
-(BuildingComponentEnum等)が含まれていても、ショートコード側で参照しなければ
-実害は無いため、生成側で除外する判定は行わない。
+出力する。ただし、他の$defsをoneOf+$refで束ねただけで独自のenum/
+x-enumDescriptionsを持たない統合$def(BuildingComponentEnum等。モデルの
+バリデーション専用で対応するWebページを持たない)は、出力対象から除外する
+(build_def_table()がNoneを返す)。
 
 x-enumDescriptionsの値の形によって表の形式を自動判定する:
     文字列                                          -> 用語/定義の2列("columns"付き)
@@ -112,9 +113,15 @@ def build_hierarchical_table(descriptions: dict) -> dict:
     return {"level_count": level_count, "rows": rows}
 
 
-def build_def_table(def_schema: dict) -> dict:
+def build_def_table(def_schema: dict) -> dict | None:
     descriptions = def_schema.get("x-enumDescriptions")
     labels = def_schema.get("x-enumDescriptionLabels")
+
+    if "oneOf" in def_schema and not descriptions and "enum" not in def_schema:
+        # 他の$defsをoneOf+$refで束ねただけの合成定義(例: BuildingComponentEnum
+        # がカテゴリ別$defs10個をまとめてモデル側のバリデーションに使う場合)。
+        # 独自の内容を持たず対応するWebページも無いため、出力対象から除外する。
+        return None
 
     if not descriptions:
         # x-enumDescriptions(値ごとの説明)が無い場合のみ、x-enumDescription
@@ -159,7 +166,9 @@ def main() -> None:
 
         out_defs = {}
         for def_name, def_schema in defs.items():
-            out_defs[def_name] = build_def_table(def_schema)
+            table = build_def_table(def_schema)
+            if table is not None:
+                out_defs[def_name] = table
 
         out = {"source_file": name, "defs": out_defs}
         out_path = DOCS_DIR / f"{name}.json"
