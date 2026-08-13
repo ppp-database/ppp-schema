@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ppp-database.org/spec/datamodel/BuildingComponent/",
+  "title": "部位",
   "type": "object",
   "properties": {
     "id": {
