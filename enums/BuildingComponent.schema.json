@@ -1,6 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ppp-database.org/spec/enum/BuildingComponent/",
+  "title": "施設の部位",
+  "x-enumExtensible": "closed",
   "$defs": {
     "BuildingPartsEnum": {
       "type": "string",

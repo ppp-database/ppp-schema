@@ -1,6 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ppp-database.org/spec/enum/LandUseZone/",
+  "title": "土地の用途地域",
+  "x-enumExtensible": "closed",
   "$defs": {
     "LandUseZoneEnum": {
       "type": "string",

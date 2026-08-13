@@ -1,6 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ppp-database.org/spec/enum/OrganizationCategory/",
+  "title": "組織種別",
+  "x-enumExtensible": "closed",
   "$defs": {
     "OrganizationCategoryEnum": {
       "type": "string",

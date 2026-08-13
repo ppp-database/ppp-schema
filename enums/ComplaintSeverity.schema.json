@@ -1,6 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ppp-database.org/spec/enum/ComplaintSeverity/",
+  "title": "不具合の緊急性",
+  "x-enumExtensible": "closed",
   "$defs": {
     "ComplaintSeverityEnum": {
       "type": "string",
