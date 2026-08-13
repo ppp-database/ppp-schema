@@ -30,7 +30,7 @@ def build_entries() -> list[dict]:
     return entries
 
 
-def render_html(entries: list[dict], link_prefix: str) -> str:
+def render_html(entries: list[dict], link_prefix: str, exports_href: str) -> str:
     items = []
     for e in entries:
         label = e["name"]
@@ -60,6 +60,7 @@ def render_html(entries: list[dict], link_prefix: str) -> str:
   <p class="note">PPP共通データ仕様協議会が公開するJSON Schema(<code>$ref</code>を含まない自己完結版)の一覧です。各データモデルの詳細は<a href="https://ppp-database.org/">ppp-database.org</a>を参照してください。</p>
   <ul>
 {chr(10).join(items)}
+      <li><a href="{exports_href}">PPP Schema - 用語(enum)インポート用Excelファイル</a></li>
   </ul>
 </body>
 </html>
@@ -73,10 +74,12 @@ def main() -> None:
     # プレフィックス無し、docs/index.html(ルート)はschemas/配下を指すため
     # "schemas/"を付ける。相対パスが異なるだけで内容(一覧の中身)は同じ。
     (SCHEMAS_DIR / "index.html").write_text(
-        render_html(entries, link_prefix=""), encoding="utf-8"
+        render_html(entries, link_prefix="", exports_href="../exports/enum.xlsx"),
+        encoding="utf-8",
     )
     (REPO_ROOT / "docs" / "index.html").write_text(
-        render_html(entries, link_prefix="schemas/"), encoding="utf-8"
+        render_html(entries, link_prefix="schemas/", exports_href="exports/enum.xlsx"),
+        encoding="utf-8",
     )
 
     print(f"[ok] {len(entries)} schemas -> docs/schemas/index.html, docs/index.html")
