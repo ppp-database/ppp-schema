@@ -163,7 +163,7 @@
       "required": ["type", "value"],
       "properties": {
         "type": { "const": "Array" },
-        "value": { "type": "array", "items": { "type": "string" }, "x-refType": "Land" }
+        "value": { "type": "array", "items": { "type": "string", "x-refType": "Land" } }
       },
       "additionalProperties": false
     },

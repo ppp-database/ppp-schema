@@ -326,9 +326,9 @@
         "value": {
           "type": "array",
           "items": {
-            "type": "string"
-          },
-          "x-refType": "Land"
+            "type": "string",
+            "x-refType": "Land"
+          }
         }
       },
       "additionalProperties": false
