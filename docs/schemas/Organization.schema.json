@@ -467,6 +467,7 @@
               "description": "日本国内の住所についてはハイフンを使わず、連続した7桁の数字からなる文字列。グローバル標準に合わせて項目を追加"
             }
           },
+          "format": "PostalAddress",
           "required": [
             "addressRegion",
             "addressLocality",
