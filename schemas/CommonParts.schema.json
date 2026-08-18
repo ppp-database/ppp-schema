@@ -162,7 +162,7 @@
       "type": "object",
       "required": ["type", "value"],
       "properties": {
-        "type": { "const": "Relationship" },
+        "type": { "const": "Array" },
         "value": { "type": "array", "items": { "type": "string" }, "x-refType": "Land" }
       },
       "additionalProperties": false
@@ -172,7 +172,7 @@
       "type": "object",
       "required": ["type", "value"],
       "properties": {
-        "type": { "const": "Relationship" },
+        "type": { "const": "Array" },
         "value": { "type": "array", "items": { "type": "string" } }
       },
       "additionalProperties": false

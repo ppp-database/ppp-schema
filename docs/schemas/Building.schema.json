@@ -321,7 +321,7 @@
       ],
       "properties": {
         "type": {
-          "const": "Relationship"
+          "const": "Array"
         },
         "value": {
           "type": "array",
