@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PPP Datamodel Embed
  * Description: JSON Schemaから生成された表データを取得し、[ppp-datamodel] [ppp-enum] [ppp-parts] ショートコードでページ内にテーブルとして埋め込む。
- * Version: 0.5.7
+ * Version: 0.5.8
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // 表示ロジックやスタイルを変更した際に古いtransientキャッシュを自動的に
 // 無効化できる(キーが変わるだけで、古いキャッシュ自体は自然に期限切れ
 // するまで残るが実害は無い)。ヘッダーコメントのVersionと同じ値に保つこと。
-define( 'PPP_DATAMODEL_EMBED_VERSION', '0.5.7' );
+define( 'PPP_DATAMODEL_EMBED_VERSION', '0.5.8' );
 
 add_shortcode( 'ppp-datamodel', 'ppp_datamodel_shortcode' );
 add_shortcode( 'ppp-enum', 'ppp_enum_shortcode' );
@@ -148,7 +148,8 @@ function ppp_enum_shortcode( $atts ) {
         // 固有のクラスを追加する(共通クラスppp-enum-table-hierarchyは
         // そのまま残し、追加CSSで基本スタイルを流用できるようにする)。
         $hierarchy_class = 'ppp-enum-table-hierarchy ppp-enum-table-hierarchy--' . sanitize_html_class( $def_name );
-        $html .= ppp_render_hierarchy_table( $columns, $def['rows'], (int) $def['level_count'], $hierarchy_class );
+        $draft_terms     = isset( $def['draft_terms'] ) && is_array( $def['draft_terms'] ) ? $def['draft_terms'] : array();
+        $html .= ppp_render_hierarchy_table( $columns, $def['rows'], (int) $def['level_count'], $hierarchy_class, $draft_terms );
     } else {
         $html .= ppp_render_datamodel_table( $def, 'ppp-enum-table' );
     }
@@ -299,9 +300,13 @@ function ppp_enum_table_style() {
 }
 
 function ppp_render_datamodel_table( $data, $table_class = 'ppp-datamodel-table' ) {
-    $columns   = $data['columns'];
-    $rows      = $data['rows'];
-    $col_count = count( $columns );
+    $columns     = $data['columns'];
+    $rows        = $data['rows'];
+    $col_count   = count( $columns );
+    // draft_terms: {用語: バッチラベル}。レビュー未完了のドラフト用語の行に
+    // ppp-draft/ppp-draft--{ラベル}クラスを付与し、追加CSSで色分けできる
+    // ようにする(色そのものはCSS側の責任、PHP側では固定しない)。
+    $draft_terms = isset( $data['draft_terms'] ) && is_array( $data['draft_terms'] ) ? $data['draft_terms'] : array();
 
     // NOTE: 既存ページのTableブロックと見た目を揃えたい場合、
     // class名を実際のページのHTMLソース(view-source)で確認し、
@@ -323,8 +328,12 @@ function ppp_render_datamodel_table( $data, $table_class = 'ppp-datamodel-table'
 
     $total = count( $rows );
     for ( $i = 0; $i < $total; $i++ ) {
-        $row = $rows[ $i ];
-        $out .= '<tr>';
+        $row      = $rows[ $i ];
+        $tr_attr  = '';
+        if ( isset( $row[0] ) && isset( $draft_terms[ $row[0] ] ) ) {
+            $tr_attr = ' class="' . esc_attr( 'ppp-draft ppp-draft--' . sanitize_html_class( $draft_terms[ $row[0] ] ) ) . '"';
+        }
+        $out .= '<tr' . $tr_attr . '>';
 
         if ( count( $row ) === $col_count ) {
             // フル行: 直後に続く「説明列を持たない短い行」の数を数え、
@@ -357,7 +366,7 @@ function ppp_render_datamodel_table( $data, $table_class = 'ppp-datamodel-table'
     return $out;
 }
 
-function ppp_render_hierarchy_table( $columns, $rows, $level_count, $table_class = 'ppp-enum-table-hierarchy' ) {
+function ppp_render_hierarchy_table( $columns, $rows, $level_count, $table_class = 'ppp-enum-table-hierarchy', $draft_terms = array() ) {
     // BuildingComponent/Phenomenonのようにサブカテゴリ>分類用語>用語...と
     // 階層が深い、または説明自体が複数列に分かれるenumを描画する。
     // 列数がenumごとに異なりppp-enum-table用の固定幅CSS(20%/80%)が
@@ -422,8 +431,15 @@ function ppp_render_hierarchy_table( $columns, $rows, $level_count, $table_class
     $out .= '</tr></thead><tbody>';
 
     for ( $i = 0; $i < $row_count; $i++ ) {
-        $row  = $rows[ $i ];
-        $out .= '<tr>';
+        $row     = $rows[ $i ];
+        // 用語(=階層の最も深いレベルの値)がdraft_termsに載っていれば行全体に
+        // 色分け用クラスを付与する。
+        $term    = isset( $row[ $level_count - 1 ] ) ? $row[ $level_count - 1 ] : '';
+        $tr_attr = '';
+        if ( '' !== $term && isset( $draft_terms[ $term ] ) ) {
+            $tr_attr = ' class="' . esc_attr( 'ppp-draft ppp-draft--' . sanitize_html_class( $draft_terms[ $term ] ) ) . '"';
+        }
+        $out .= '<tr' . $tr_attr . '>';
 
         $c = 0;
         while ( $c < $level_count ) {

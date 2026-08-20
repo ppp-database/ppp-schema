@@ -38,6 +38,14 @@ x-enumDescription(単数形、enum全体への注記)は、x-enumDescriptionsが
 セルとして表示される("note"というフィールドは出力しない)。
 x-enumDescriptionsがある場合はx-enumDescriptionsを優先し、x-enumDescriptionは
 表示上無視する。
+
+x-draftTerms(任意、$defごと): {用語: バッチラベル}の形で、レビュー未完了の
+ドラフト用語を示す。該当用語はx-enumDescriptionsに含めて表には表示するが、
+enum配列(正式な値の一覧)には含めない運用とする(スキーマ側の責任、この
+スクリプトはenum配列自体を生成しないため関与しない)。出力側では行データ
+とは別に"draft_terms"フィールドとしてそのまま渡し、WordPress側で色分け
+表示できるようにする。バッチラベルは複数の未レビュー依頼を区別するための
+任意の文字列(例: "req1")で、実際の色はWordPress側の追加CSSで指定する。
 """
 import json
 import sys
@@ -116,6 +124,13 @@ def build_hierarchical_table(descriptions: dict) -> dict:
 def build_def_table(def_schema: dict) -> dict | None:
     descriptions = def_schema.get("x-enumDescriptions")
     labels = def_schema.get("x-enumDescriptionLabels")
+    # x-draftTerms: {用語: バッチラベル} で、レビュー未完了のドラフト用語を示す。
+    # ドラフト用語はx-enumDescriptionsには含めて表には表示するが(enum配列には
+    # 含めない運用、正式採用まではバリデーション対象外とする)、出力側では
+    # "draft_terms"として行データとは別に渡し、WordPress側で色分け表示できる
+    # ようにする。バッチラベルは複数の未レビュー依頼を区別するための任意の
+    # 文字列(色そのものはWordPress側の追加CSSで指定する)。
+    draft_terms = def_schema.get("x-draftTerms")
 
     if "oneOf" in def_schema and not descriptions and "enum" not in def_schema:
         # 他の$defsをoneOf+$refで束ねただけの合成定義(例: BuildingComponentEnum
@@ -139,20 +154,32 @@ def build_def_table(def_schema: dict) -> dict | None:
             rows = [[enum_values[0], note]] + [[term] for term in enum_values[1:]]
         else:
             rows = [[term, ""] for term in enum_values]
-        return {"columns": ["用語", "定義"], "rows": rows}
+        result = {"columns": ["用語", "定義"], "rows": rows}
+        if draft_terms:
+            result["draft_terms"] = draft_terms
+        return result
 
     shape = classify(descriptions, labels)
     if shape == "flat":
         columns = ["用語", "定義"]
         rows = build_flat_rows(descriptions)
-        return {"columns": columns, "rows": rows}
+        result = {"columns": columns, "rows": rows}
+        if draft_terms:
+            result["draft_terms"] = draft_terms
+        return result
     if shape == "structured":
         columns, rows = build_structured_rows(descriptions, labels)
-        return {"columns": columns, "rows": rows}
+        result = {"columns": columns, "rows": rows}
+        if draft_terms:
+            result["draft_terms"] = draft_terms
+        return result
 
     # hierarchical: 列名はショートコード側のcolumns属性で与える運用のため、
     # ここでは"columns"を出力せず"level_count"のみ出力する。
-    return build_hierarchical_table(descriptions)
+    result = build_hierarchical_table(descriptions)
+    if draft_terms:
+        result["draft_terms"] = draft_terms
+    return result
 
 
 def main() -> None:
