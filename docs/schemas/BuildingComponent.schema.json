@@ -887,7 +887,7 @@
                   "x-enumDescriptions": {
                     "センサー": {
                       "": {
-                        "センサー": "計測するための機器全般を指します。「設備(Device)」のCategoryにこの用語を指定した時には、controlledPropertyで具体的な観測特性を登録します。"
+                        "センサー": "計測するための機器全般を指します。「[機種 (DeviceModel)](https://ppp-database.org/spec/datamodel/DeviceModel/)」の設備種別(Category)にこの用語を指定した時には、同時に制御対象(controlledProperty)で具体的な観測特性を登録します。"
                       }
                     },
                     "プール": {
