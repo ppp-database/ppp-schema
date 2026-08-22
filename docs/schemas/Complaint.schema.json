@@ -639,6 +639,7 @@
           "type": "object",
           "properties": {
             "abstracts": {
+              "description": "列挙メンバは建物(Building)または施設(Facility)のZonesから選択した文字列です。このArrayは順序に意味を持ち(順序付きリスト)、zoneName、subzoneNameの第一要素、subzoneNameの第二要素の順番に登録します。例えば、[“校舎”,“2F”,“1年A組”]となります",
               "type": "array",
               "items": [
                 {
@@ -654,7 +655,7 @@
                   "type": "string"
                 }
               ],
-              "description": "列挙メンバは建物(Building)または施設(Facility)のZonesから選択した文字列です。このArrayは順序に意味を持ち(順序付きリスト)、zoneName、subzoneNameの第一要素、subzoneNameの第二要素の順番に登録します。例えば、[“校舎”,“2F”,“1年A組”]となります"
+              "maxItems": 3
             },
             "remarks": {
               "title": "場所補足",

@@ -157,21 +157,7 @@
           "type": "object",
           "properties": {
             "abstracts": {
-              "type": "array",
-              "items": [
-                {
-                  "title": "場所大分類",
-                  "type": "string"
-                },
-                {
-                  "title": "場所中分類",
-                  "type": "string"
-                },
-                {
-                  "title": "場所小分類",
-                  "type": "string"
-                }
-              ],
+              "$ref": "../CommonParts.schema.json#/$defs/ZoneInstalledValue",
               "description": "列挙メンバは建物(Building)または施設(Facility)のZonesから選択した文字列です。このArrayは順序に意味を持ち(順序付きリスト)、zoneName、subzoneNameの第一要素、subzoneNameの第二要素の順番に登録します。例えば、[“校舎”,“2F”,“1年A組”]となります"
             },
             "remarks": {

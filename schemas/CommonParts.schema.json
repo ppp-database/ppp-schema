@@ -69,20 +69,22 @@
       }
     },
 
+    "ZoneInstalledValue": {
+      "type": "array",
+      "items": [
+        { "title": "場所大分類", "type": "string" },
+        { "title": "場所中分類", "type": "string" },
+        { "title": "場所小分類", "type": "string" }
+      ],
+      "maxItems": 3
+    },
+
     "ZoneInstalledAttribute": {
       "type": "object",
       "required": ["type", "value"],
       "properties": {
         "type": { "const": "Array" },
-        "value": {
-          "type": "array",
-          "items": [
-            { "title": "場所大分類", "type": "string" },
-            { "title": "場所中分類", "type": "string" },
-            { "title": "場所小分類", "type": "string" }
-          ],
-          "maxItems": 3
-        }
+        "value": { "$ref": "#/$defs/ZoneInstalledValue" }
       }
     },
 
