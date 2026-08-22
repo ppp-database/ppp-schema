@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PPP Datamodel Embed
  * Description: JSON Schemaから生成された表データを取得し、[ppp-datamodel] [ppp-enum] [ppp-parts] ショートコードでページ内にテーブルとして埋め込む。
- * Version: 0.5.9
+ * Version: 0.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,18 +13,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 // 表示ロジックやスタイルを変更した際に古いtransientキャッシュを自動的に
 // 無効化できる(キーが変わるだけで、古いキャッシュ自体は自然に期限切れ
 // するまで残るが実害は無い)。ヘッダーコメントのVersionと同じ値に保つこと。
-define( 'PPP_DATAMODEL_EMBED_VERSION', '0.5.9' );
+define( 'PPP_DATAMODEL_EMBED_VERSION', '0.6.0' );
 
 add_shortcode( 'ppp-datamodel', 'ppp_datamodel_shortcode' );
 add_shortcode( 'ppp-enum', 'ppp_enum_shortcode' );
 add_shortcode( 'ppp-parts', 'ppp_parts_shortcode' );
 
+// ショートコードのnocache属性("1"/"true"/"yes"/"on")を判定する。
+// 真の場合、transientキャッシュを読み飛ばして必ず再取得すると共に、
+// GitHub Pages側のCDN(Fastly)キャッシュも回避するためリクエストURLに
+// 使い捨てのクエリパラメータを付与する。
+function ppp_shortcode_bool( $value ) {
+    $value = strtolower( trim( (string) $value ) );
+    return in_array( $value, array( '1', 'true', 'yes', 'on' ), true );
+}
+
 function ppp_datamodel_shortcode( $atts ) {
     $atts = shortcode_atts(
         array(
-            'model'  => '',
-            'source' => '', // テスト時は明示的にURLを渡す。本番は既定のGitHub Pages URLに切り替え予定
-            'ttl'    => HOUR_IN_SECONDS,
+            'model'   => '',
+            'source'  => '', // テスト時は明示的にURLを渡す。本番は既定のGitHub Pages URLに切り替え予定
+            'ttl'     => HOUR_IN_SECONDS,
+            'nocache' => '', // "1"指定で強制的に最新データを再取得する
         ),
         $atts,
         'ppp-datamodel'
@@ -32,6 +42,7 @@ function ppp_datamodel_shortcode( $atts ) {
 
     $model = sanitize_text_field( $atts['model'] );
     $source_url = esc_url_raw( $atts['source'] );
+    $nocache = ppp_shortcode_bool( $atts['nocache'] );
 
     if ( empty( $model ) || empty( $source_url ) ) {
         return '<p><em>ppp-datamodel: model / source 属性が指定されていません。</em></p>';
@@ -40,12 +51,13 @@ function ppp_datamodel_shortcode( $atts ) {
     $cache_key       = 'ppp_datamodel_' . md5( PPP_DATAMODEL_EMBED_VERSION . $model . $source_url );
     $stale_cache_key = $cache_key . '_stale';
 
-    $html = get_transient( $cache_key );
+    $html = $nocache ? false : get_transient( $cache_key );
     if ( false !== $html ) {
         return ppp_datamodel_table_style() . $html;
     }
 
-    $response = wp_remote_get( $source_url, array( 'timeout' => 8 ) );
+    $request_url = $nocache ? add_query_arg( '_ppp_cachebust', time(), $source_url ) : $source_url;
+    $response = wp_remote_get( $request_url, array( 'timeout' => 8 ) );
 
     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
         $stale = get_transient( $stale_cache_key );
@@ -80,6 +92,7 @@ function ppp_enum_shortcode( $atts ) {
             'def'     => '',
             'columns' => '',
             'ttl'     => HOUR_IN_SECONDS,
+            'nocache' => '', // "1"指定で強制的に最新データを再取得する
         ),
         $atts,
         'ppp-enum'
@@ -87,6 +100,7 @@ function ppp_enum_shortcode( $atts ) {
 
     $def_name   = sanitize_text_field( $atts['def'] );
     $source_url = esc_url_raw( $atts['source'] );
+    $nocache    = ppp_shortcode_bool( $atts['nocache'] );
 
     if ( empty( $def_name ) || empty( $source_url ) ) {
         return '<p><em>ppp-enum: def / source 属性が指定されていません。</em></p>';
@@ -95,12 +109,13 @@ function ppp_enum_shortcode( $atts ) {
     $cache_key       = 'ppp_enum_' . md5( PPP_DATAMODEL_EMBED_VERSION . $def_name . $source_url );
     $stale_cache_key = $cache_key . '_stale';
 
-    $html = get_transient( $cache_key );
+    $html = $nocache ? false : get_transient( $cache_key );
     if ( false !== $html ) {
         return ppp_enum_table_style() . $html;
     }
 
-    $response = wp_remote_get( $source_url, array( 'timeout' => 8 ) );
+    $request_url = $nocache ? add_query_arg( '_ppp_cachebust', time(), $source_url ) : $source_url;
+    $response = wp_remote_get( $request_url, array( 'timeout' => 8 ) );
 
     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
         $stale = get_transient( $stale_cache_key );
@@ -166,9 +181,10 @@ function ppp_parts_shortcode( $atts ) {
     // 除きppp_enum_shortcode()とほぼ同じ構造。
     $atts = shortcode_atts(
         array(
-            'source' => '',
-            'def'    => '',
-            'ttl'    => HOUR_IN_SECONDS,
+            'source'  => '',
+            'def'     => '',
+            'ttl'     => HOUR_IN_SECONDS,
+            'nocache' => '', // "1"指定で強制的に最新データを再取得する
         ),
         $atts,
         'ppp-parts'
@@ -176,6 +192,7 @@ function ppp_parts_shortcode( $atts ) {
 
     $def_name   = sanitize_text_field( $atts['def'] );
     $source_url = esc_url_raw( $atts['source'] );
+    $nocache    = ppp_shortcode_bool( $atts['nocache'] );
 
     if ( empty( $def_name ) || empty( $source_url ) ) {
         return '<p><em>ppp-parts: def / source 属性が指定されていません。</em></p>';
@@ -184,12 +201,13 @@ function ppp_parts_shortcode( $atts ) {
     $cache_key       = 'ppp_parts_' . md5( PPP_DATAMODEL_EMBED_VERSION . $def_name . $source_url );
     $stale_cache_key = $cache_key . '_stale';
 
-    $html = get_transient( $cache_key );
+    $html = $nocache ? false : get_transient( $cache_key );
     if ( false !== $html ) {
         return ppp_datamodel_table_style() . $html;
     }
 
-    $response = wp_remote_get( $source_url, array( 'timeout' => 8 ) );
+    $request_url = $nocache ? add_query_arg( '_ppp_cachebust', time(), $source_url ) : $source_url;
+    $response = wp_remote_get( $request_url, array( 'timeout' => 8 ) );
 
     if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
         $stale = get_transient( $stale_cache_key );
