@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PPP Datamodel Embed
  * Description: JSON Schemaから生成された表データを取得し、[ppp-datamodel] [ppp-enum] [ppp-parts] ショートコードでページ内にテーブルとして埋め込む。
- * Version: 0.5.8
+ * Version: 0.5.9
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // 表示ロジックやスタイルを変更した際に古いtransientキャッシュを自動的に
 // 無効化できる(キーが変わるだけで、古いキャッシュ自体は自然に期限切れ
 // するまで残るが実害は無い)。ヘッダーコメントのVersionと同じ値に保つこと。
-define( 'PPP_DATAMODEL_EMBED_VERSION', '0.5.8' );
+define( 'PPP_DATAMODEL_EMBED_VERSION', '0.5.9' );
 
 add_shortcode( 'ppp-datamodel', 'ppp_datamodel_shortcode' );
 add_shortcode( 'ppp-enum', 'ppp_enum_shortcode' );
@@ -234,17 +234,36 @@ function ppp_encode_url_fragment( $url ) {
 function ppp_linkify( $text ) {
     // "[表示文字](URL)" 記法を <a> タグに変換する（type列・説明列で共通利用）。
     // 手順: 1) リンク部分を先に抜き出しトークン化 2) 残りの生テキストを丸ごとエスケープ
-    //       3) トークンを安全な<a>タグに置き戻す
+    //       3) トークンを安全なタグに置き戻す
     // こうしないと、説明文中の "<国名コード>" のようなプレースホルダ表記が
     // 未知のHTMLタグとして扱われ、ブラウザ上で消えてしまう。
+    //
+    // カッコ内がURLらしくない場合(スキーム付き"://"、"#"アンカー、"/"絶対パス
+    // のいずれも含まない場合)は、リンクではなくx-draftTermsと同じバッチラベル
+    // による色分け指定とみなし、"[追記した部分](20260820)"の様に文章の一部
+    // だけを<span class="ppp-draft ppp-draft--20260820">として出力する。
+    // 行全体を色分けするppp-draft--{ラベル}クラスと同じ名前を使うため、
+    // WordPress側の追加CSSは1つのルールで行全体・文章の一部の両方に効く。
     $links = array();
 
     $with_tokens = preg_replace_callback(
         '/\[([^\]]+)\]\(([^)]+)\)/',
         function ( $matches ) use ( &$links ) {
-            $token = '{{PPP_LINK_' . count( $links ) . '}}';
-            $url   = ppp_encode_url_fragment( $matches[2] );
-            $links[ $token ] = '<a href="' . esc_url( $url ) . '">' . esc_html( $matches[1] ) . '</a>';
+            $token  = '{{PPP_LINK_' . count( $links ) . '}}';
+            $label  = $matches[1];
+            $target = $matches[2];
+
+            $looks_like_url = ( false !== strpos( $target, '://' ) )
+                || ( 0 === strpos( $target, '#' ) )
+                || ( 0 === strpos( $target, '/' ) );
+
+            if ( $looks_like_url ) {
+                $url = ppp_encode_url_fragment( $target );
+                $links[ $token ] = '<a href="' . esc_url( $url ) . '">' . esc_html( $label ) . '</a>';
+            } else {
+                $span_class = 'ppp-draft ppp-draft--' . sanitize_html_class( $target );
+                $links[ $token ] = '<span class="' . esc_attr( $span_class ) . '">' . esc_html( $label ) . '</span>';
+            }
             return $token;
         },
         $text
