@@ -34,7 +34,7 @@
                 "title": "電話番号",
                 "type": "array",
                 "items": { "type": "string", "x-partType": "Telephone" },
-                "description": "電話番号、携帯電話番号です。電話番号は“+-0123456789”の文字からなる文字列とし、“+”は文字列の先頭のみ許されます。詳しくは[データパーツの説明](https://ppp-database.org/spec/parts/telephone/)を参照して下さい。"
+                "description": "電話番号、携帯電話番号です。電話番号は“+-0123456789”の文字からなる文字列とし、“+”は文字列の先頭のみ許されます。詳しくは[データパーツの説明](https://ppp-database.org/spec/parts/Telephone/)を参照して下さい。"
               },
               "extension": {
                 "title": "内線番号",

@@ -62,7 +62,7 @@
       "address",
       "[PostalAddress](https://ppp-database.org/spec/parts/PostalAddress/)",
       "1",
-      "住所をPostalAddress形式で設定します。郵便番号は、土地に付番された郵便番号を登録するものとし、個別郵便番号は施設のデータモデルである[Facility](https://ppp-database.org/spc/datamodel/Facility)に登録します"
+      "住所をPostalAddress形式で設定します。郵便番号は、土地に付番された郵便番号を登録するものとし、個別郵便番号は施設のデータモデルである[Facility](https://ppp-database.org/spec/datamodel/Facility)に登録します"
     ],
     [
       "面積",
@@ -111,7 +111,7 @@
       "ownership",
       "Text",
       "1",
-      "所有形態。“市”、“町”、“県”、“借上”げなど。公共施設の場合は必須です(施設カルテ等で使用します)。但し、建物が“借上”の場合、記入は必須ではない"
+      "所有形態。“市”、“町”、“県”、“借上げ”など。公共施設の場合は必須です(施設カルテ等で使用します)。但し、建物が“借上”の場合、記入は必須ではない"
     ],
     [
       "取得価格",

@@ -13,7 +13,7 @@
       "id",
       "[Id](https://ppp-database.org/spec/parts/id/)",
       "1",
-      "測定値や確認結果を一意に識別する識別子です。この項目はNGSI V2仕様における[主キー](https://ppp-database.org/howtouse/terms-2/#主キー)ですので、一旦割り当てた案件IDは変更する事はできません。\nNGSI-LDの仕様に合わせ、次の形式の識別子とします。\n　“urn:ngsi-ld:Observation”<一意となる文字列>\n<一意となる文字列>は一意となる文字列であれば何でも構いませんが、本項目値全体でurnの規格に合致する必要があります。"
+      "測定値や確認結果を一意に識別する識別子です。この項目はNGSI V2仕様における[主キー](https://ppp-database.org/howtouse/terms-2/#主キー)ですので、一旦割り当てた案件IDは変更する事はできません。\nNGSI-LDの仕様に合わせ、次の形式の識別子とします。\n　“urn:ngsi-ld:Observation:”<一意となる文字列>\n<一意となる文字列>は一意となる文字列であれば何でも構いませんが、本項目値全体でurnの規格に合致する必要があります。"
     ],
     [
       "-",
@@ -48,7 +48,7 @@
       "stepNumber",
       "Number",
       "1",
-      "「[観測手順 (Procedure)](https://ppp-database.org/spec/datamodel/procedure/)」に基づく場合は「観測手順 (Procedure)」内の「作業指示 (ProcedureSteps)」で定義した「ステップ番号」です。"
+      "「[観測手順 (Procedure)](https://ppp-database.org/spec/datamodel/Procedure/)」に基づく場合は「観測手順 (Procedure)」内の「作業指示 (ProcedureSteps)」で定義した「ステップ番号」です。"
     ],
     [
       "説明",

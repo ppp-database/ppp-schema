@@ -43,7 +43,7 @@
           "∟telephone",
           "Array([Telephone](https://ppp-database.org/spec/parts/Telephone/))",
           "*",
-          "電話番号、携帯電話番号です。電話番号は“+-0123456789”の文字からなる文字列とし、“+”は文字列の先頭のみ許されます。詳しくは[データパーツの説明](https://ppp-database.org/spec/parts/telephone/)を参照して下さい。"
+          "電話番号、携帯電話番号です。電話番号は“+-0123456789”の文字からなる文字列とし、“+”は文字列の先頭のみ許されます。詳しくは[データパーツの説明](https://ppp-database.org/spec/parts/Telephone/)を参照して下さい。"
         ],
         [
           "∟内線番号",

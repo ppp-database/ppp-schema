@@ -111,7 +111,7 @@
       "status",
       "Text",
       "1",
-      "活動状況を登録します。“処置中”、“完了”などです。列挙型項目でありませんが、一部の用語を定義しています。用語の定義は「[案件ステータス(ComplaintStatus)](https://ppp-database.org/spec/enum/complaintstatus/)」を参照してください"
+      "活動状況を登録します。“処置中”、“完了”などです。列挙型項目でありませんが、一部の用語を定義しています。用語の定義は「[案件ステータス(ComplaintStatus)](https://ppp-database.org/spec/enum/ComplaintStatus/)」を参照してください"
     ],
     [
       "経緯",
