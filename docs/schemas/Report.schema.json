@@ -106,10 +106,18 @@
             },
             "value": {
               "type": "array",
-              "items": {
-                "type": "string",
-                "format": "date"
-              },
+              "items": [
+                {
+                  "type": "string",
+                  "format": "date",
+                  "title": "開始日"
+                },
+                {
+                  "type": "string",
+                  "format": "date",
+                  "title": "終了日"
+                }
+              ],
               "minItems": 2,
               "maxItems": 2
             }
