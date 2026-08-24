@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://ppp-database.org/spec/part/ProcedureStep",
+  "$id": "https://ppp-database.org/spec/parts/ProcedureStep.schema.json",
   "title": "Procedure Step Item Schema",
   "description": "Defines the structure for a single step within the Procedure's steps array, allowing for different step types.",
   "oneOf": [
