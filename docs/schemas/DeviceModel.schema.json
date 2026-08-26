@@ -1545,7 +1545,7 @@
     },
     "modelName": {
       "title": "モデル名",
-      "description": "機器のモデル名を登録します。例えば”RAS-DM28KE8″など。",
+      "description": "機器のモデル名を登録します。例えば“RAS-DM28KE8”など。",
       "type": "object",
       "required": [
         "type",

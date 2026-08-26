@@ -393,7 +393,7 @@
     },
     "fiscalYearStartDay": {
       "title": "事業年度開始日",
-      "description": "年度開始日を”MM-DD”形式で記載。省略時には”04-01″を指定したと解釈する",
+      "description": "年度開始日を”MM-DD”形式で記載。省略時には“04-01”を指定したと解釈する",
       "type": "object",
       "required": [
         "type",
