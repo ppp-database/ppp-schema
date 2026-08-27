@@ -1670,5 +1670,27 @@
   "required": [
     "id",
     "type"
-  ]
+  ],
+  "x-lookups": {
+    "refDeviceModel": {
+      "DeviceModel": {}
+    },
+    "refFacility": {
+      "Facility": {}
+    },
+    "refBuilding": {
+      "Building": {
+        "refLand": {
+          "Land": {}
+        },
+        "buildingParent": {
+          "Building": {
+            "refLand": {
+              "Land": {}
+            }
+          }
+        }
+      }
+    }
+  }
 }

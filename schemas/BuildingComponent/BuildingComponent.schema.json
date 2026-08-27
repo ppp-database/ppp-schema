@@ -84,5 +84,24 @@
   "required": [
     "id",
     "type"
-  ]
+  ],
+  "x-lookups": {
+    "refFacility": {
+      "Facility": {}
+    },
+    "refBuilding": {
+      "Building": {
+        "refLand": {
+          "Land": {}
+        },
+        "buildingParent": {
+          "Building": {
+            "refLand": {
+              "Land": {}
+            }
+          }
+        }
+      }
+    }
+  }
 }

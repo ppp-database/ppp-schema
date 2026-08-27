@@ -215,5 +215,77 @@
   "required": [
     "id",
     "type"
-  ]
+  ],
+  "x-lookups": {
+    "refSubmitter": {
+      "Organization": {
+        "refFacility": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "reportParent": {
+      "Report": {}
+    },
+    "refTarget": {
+      "Building": {
+        "refLand": {
+          "Land": {}
+        },
+        "buildingParent": {
+          "Building": {
+            "refLand": {
+              "Land": {}
+            }
+          }
+        }
+      },
+      "Device": {},
+      "BuildingComponent": {}
+    },
+    "refFacility": {
+      "Facility": {
+        "refBuilding": {
+          "Building": {
+            "refLand": {
+              "Land": {}
+            },
+            "buildingParent": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        },
+        "facilityParent": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        },
+        "refDepartment": {
+          "Department": {
+            "departmentOf": {
+              "Organization": {}
+            }
+          }
+        }
+      }
+    }
+  }
 }

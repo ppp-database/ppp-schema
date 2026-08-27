@@ -70,5 +70,43 @@
         }
       }
     }
+  },
+  "x-lookups": {
+    "refFacility": {
+      "Facility": {
+        "refBuilding": {
+          "Building": {
+            "refLand": {
+              "Land": {}
+            },
+            "buildingParent": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        },
+        "facilityParent": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        },
+        "refDepartment": {
+          "Department": {
+            "departmentOf": {
+              "Organization": {}
+            }
+          }
+        }
+      }
+    }
   }
 }

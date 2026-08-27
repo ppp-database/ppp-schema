@@ -37,5 +37,37 @@
   "required": [
     "id",
     "type"
-  ]
+  ],
+  "x-lookups": {
+    "departmentOf": {
+      "Organization": {
+        "refFacility": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                },
+                "buildingParent": "Building"
+              }
+            },
+            "facilityParent": "Facility"
+          }
+        }
+      }
+    },
+    "refFacility": {
+      "Facility": {
+        "refBuilding": {
+          "Building": {
+            "refLand": {
+              "Land": {}
+            },
+            "buildingParent": "Building"
+          }
+        },
+        "facilityParent": "Facility"
+      }
+    }
+  }
 }

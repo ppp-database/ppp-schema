@@ -1191,5 +1191,126 @@
   "required": [
     "id",
     "type"
-  ]
+  ],
+  "x-lookups": {
+    "refBuilding": {
+      "Building": {
+        "refLand": {
+          "Land": {}
+        },
+        "refDepartment": {
+          "Department": {
+            "departmentOf": {
+              "Organization": {
+                "refFacility": {
+                  "Facility": {
+                    "refBuilding": {
+                      "Building": {
+                        "refLand": {
+                          "Land": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "refFacility": {
+              "Facility": {
+                "refBuilding": {
+                  "Building": {
+                    "refLand": {
+                      "Land": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "refOwner": {
+          "Organization": {
+            "refFacility": {
+              "Facility": {
+                "refBuilding": {
+                  "Building": {
+                    "refLand": {
+                      "Land": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "refFacilityManager": {
+          "Organization": {}
+        },
+        "buildingParent": {
+          "Building": {
+            "refLand": {
+              "Land": {}
+            }
+          }
+        }
+      }
+    },
+    "refOperationManager": {
+      "Organization": {},
+      "Department": {
+        "departmentOf": {
+          "Organization": {}
+        }
+      }
+    },
+    "refFacilityManager": {
+      "Organization": {},
+      "Department": {
+        "departmentOf": {
+          "Organization": {}
+        }
+      }
+    },
+    "facilityParent": {
+      "Facility": {
+        "refBuilding": {
+          "Building": {
+            "refLand": {
+              "Land": {}
+            }
+          }
+        }
+      }
+    },
+    "refDepartment": {
+      "Department": {
+        "departmentOf": {
+          "Organization": {
+            "refFacility": {
+              "Facility": {
+                "refBuilding": {
+                  "Building": {
+                    "refLand": {
+                      "Land": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "refFacility": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -330,5 +330,51 @@
       "description": "観測結果と共に、付随する情報を登録する構造体です。付随する情報とは、例えば室温の測定結果と共に、外気温や日照量などの分析に役立つ情報を指します。主たる測定結果はArray内の一つ目の要素に格納します。このArrayの要素には以下のみっつの形式があります。",
       "title": "観測結果"
     }
+  },
+  "x-lookups": {
+    "refProcedure": {
+      "Procedure": {
+        "refFacility": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                },
+                "buildingParent": {
+                  "Building": {
+                    "refLand": {
+                      "Land": {}
+                    }
+                  }
+                }
+              }
+            },
+            "facilityParent": {
+              "Facility": {
+                "refBuilding": {
+                  "Building": {
+                    "refLand": {
+                      "Land": {}
+                    }
+                  }
+                }
+              }
+            },
+            "refDepartment": {
+              "Department": {
+                "departmentOf": {
+                  "Organization": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refFeatureOfInterest": {
+      "Device": {},
+      "BuildingComponent": {}
+    }
   }
 }

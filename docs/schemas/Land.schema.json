@@ -739,5 +739,72 @@
     "id",
     "type"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "x-lookups": {
+    "refContactPoint": {
+      "Organization": {
+        "refFacility": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "Department": {
+        "departmentOf": {
+          "Organization": {
+            "refFacility": {
+              "Facility": {
+                "refBuilding": {
+                  "Building": {
+                    "refLand": {
+                      "Land": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "refFacility": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refOwner": {
+      "Organization": {
+        "refFacility": {
+          "Facility": {
+            "refBuilding": {
+              "Building": {
+                "refLand": {
+                  "Land": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "refDepartment": {
+      "Department": {
+        "departmentOf": {
+          "Organization": {}
+        }
+      }
+    }
+  }
 }
