@@ -171,34 +171,34 @@
             },
             "refDepartment": {
               "Department": {
-                "departmentOf": "Organization",
-                "refFacility": "Facility"
+                "departmentOf": {"Organization": {}},
+                "refFacility": {"Facility": {}}
               }
             },
-            "refOwner": "Organization",
-            "refFacilityManager": "Organization",
-            "buildingParent": "Building"
+            "refOwner": {"Organization": {}},
+            "refFacilityManager": {"Organization": {}},
+            "buildingParent": {"Building": {}}
           }
         },
         "refOperationManager": {
           "Organization": {},
           "Department": {
-            "departmentOf": "Organization",
-            "refFacility": "Facility"
+            "departmentOf": {"Organization": {}},
+            "refFacility": {"Facility": {}}
           }
         },
         "refFacilityManager": {
           "Organization": {},
           "Department": {
-            "departmentOf": "Organization",
-            "refFacility": "Facility"
+            "departmentOf": {"Organization": {}},
+            "refFacility": {"Facility": {}}
           }
         },
-        "facilityParent": "Facility",
+        "facilityParent": {"Facility": {}},
         "refDepartment": {
           "Department": {
-            "departmentOf": "Organization",
-            "refFacility": "Facility"
+            "departmentOf": {"Organization": {}},
+            "refFacility": {"Facility": {}}
           }
         }
       }
