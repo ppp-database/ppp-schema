@@ -431,7 +431,6 @@
       "title": "登記住所",
       "description": "法人の登記上の住所",
       "type": "object",
-      "x-suggested-name": "address",
       "properties": {
         "type": {
           "const": "PostalAddress"
@@ -463,7 +462,6 @@
             "postalCode": {
               "title": "郵便番号",
               "type": "string",
-              "x-partType": "PostalCode",
               "description": "日本国内の住所についてはハイフンを使わず、連続した7桁の数字からなる文字列。グローバル標準に合わせて項目を追加"
             }
           },
@@ -486,7 +484,6 @@
       "title": "連絡先",
       "description": "連絡先情報は法人と部門の両方にある。本項目は代表電話などを期待",
       "type": "object",
-      "x-suggested-name": "contactPoint",
       "properties": {
         "type": {
           "const": "ContactPoint"
@@ -530,8 +527,7 @@
                 "title": "電話番号",
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "x-partType": "Telephone"
+                  "type": "string"
                 },
                 "description": "電話番号、携帯電話番号です。電話番号は“+-0123456789”の文字からなる文字列とし、“+”は文字列の先頭のみ許されます。詳しくは[データパーツの説明](https://ppp-database.org/spec/parts/Telephone/)を参照して下さい。"
               },

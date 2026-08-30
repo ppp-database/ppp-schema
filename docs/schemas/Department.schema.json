@@ -75,7 +75,6 @@
       "title": "連絡先",
       "description": "連絡先情報。継承元のコア・データモデルで必須となっていますが、電話番号が必須なのかメールなのか等の指定はありません。共通データ仕様でもコア・データモデルの通り必須してありますが、何を登録するのかしないのかは状況に合わせて個々に決める必要があります。項目の詳細は共通パーツを参照してください。例えば公共施設管理の所管部門の場合は、電話番号の登録を期待しているなどです",
       "type": "object",
-      "x-suggested-name": "contactPoint",
       "properties": {
         "type": {
           "const": "ContactPoint"
@@ -119,8 +118,7 @@
                 "title": "電話番号",
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "x-partType": "Telephone"
+                  "type": "string"
                 },
                 "description": "電話番号、携帯電話番号です。電話番号は“+-0123456789”の文字からなる文字列とし、“+”は文字列の先頭のみ許されます。詳しくは[データパーツの説明](https://ppp-database.org/spec/parts/Telephone/)を参照して下さい。"
               },

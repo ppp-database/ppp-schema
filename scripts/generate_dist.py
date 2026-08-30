@@ -22,6 +22,25 @@ def strip_unused_defs(schema: dict) -> dict:
     return schema
 
 
+_STRIP_KEYS = {
+    "x-partType",             # ドキュメント生成(generate_docs.py)専用
+    "x-suggested-name",       # Parts テーブル生成(generate_parts_docs.py)専用
+    "x-enumDescriptionLabels",# enum テーブル列見出し(generate_enum_docs.py)専用
+}
+
+
+def strip_tool_only_keys(obj):
+    """公開スキーマに含めないツール専用キーを再帰的に除去する。"""
+    if isinstance(obj, dict):
+        for key in _STRIP_KEYS:
+            obj.pop(key, None)
+        for v in obj.values():
+            strip_tool_only_keys(v)
+    elif isinstance(obj, list):
+        for item in obj:
+            strip_tool_only_keys(item)
+
+
 def main() -> None:
     SCHEMA_DIR.mkdir(parents=True, exist_ok=True)
     models = sorted(p.name for p in SCHEMAS_DIR.iterdir() if p.is_dir())
@@ -34,6 +53,7 @@ def main() -> None:
 
         expanded = load_and_expand(schema_path)
         expanded = strip_unused_defs(expanded)
+        strip_tool_only_keys(expanded)
 
         out_path = SCHEMA_DIR / f"{model}.schema.json"
         out_path.write_text(

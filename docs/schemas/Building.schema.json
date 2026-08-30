@@ -641,7 +641,6 @@
       "title": "アクセシビリティ情報",
       "description": "詳細は、共通パーツAccessibilityを参照してください",
       "type": "object",
-      "x-suggested-name": "accessibility",
       "properties": {
         "type": {
           "const": "Accessibility"

@@ -407,7 +407,6 @@
       "title": "座標",
       "description": "不具合の発生個所を座標で示します。例えば、道路の陥没、河川の汚染、街角の異臭などの広い範囲で場所を特定することを想定しています。施設管理の局面で必要性は低いと考えます。",
       "type": "object",
-      "x-suggested-name": "location",
       "properties": {
         "type": {
           "const": "geo:json"

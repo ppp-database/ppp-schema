@@ -1135,11 +1135,6 @@
                   "風向",
                   "風速"
                 ],
-                "x-enumDescriptionLabels": {
-                  "standardTerm": "標準用語",
-                  "description": "説明",
-                  "unitExamples": "測定単位の例"
-                },
                 "x-enumDescriptions": {
                   "大気汚染": {
                     "standardTerm": "airPollution",

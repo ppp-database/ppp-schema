@@ -237,7 +237,6 @@
     },
     "postalCode": {
       "title": "個別郵便番号",
-      "x-partType": "PostalCode",
       "description": "施設が個別郵便番号を有する場合に登録する。このAttributeに登録が無い場合は、リンクを辿ってLandのpostalCodeを参照する",
       "type": "object",
       "required": [
@@ -296,7 +295,6 @@
       "title": "開館時間帯",
       "description": "曜日ごとの開館閉館時刻の配列。",
       "type": "object",
-      "x-suggested-name": "openingHours",
       "properties": {
         "type": {
           "const": "OpeningHours"
@@ -558,7 +556,6 @@
       "title": "連絡先",
       "description": "施設の代表電話などを登録する",
       "type": "object",
-      "x-suggested-name": "contactPoint",
       "properties": {
         "type": {
           "const": "ContactPoint"
@@ -602,8 +599,7 @@
                 "title": "電話番号",
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "x-partType": "Telephone"
+                  "type": "string"
                 },
                 "description": "電話番号、携帯電話番号です。電話番号は“+-0123456789”の文字からなる文字列とし、“+”は文字列の先頭のみ許されます。詳しくは[データパーツの説明](https://ppp-database.org/spec/parts/Telephone/)を参照して下さい。"
               },
@@ -681,7 +677,6 @@
       "title": "アクセシビリティ情報",
       "description": "施設のバリアフリー情報などを登録します。",
       "type": "object",
-      "x-suggested-name": "accessibility",
       "properties": {
         "type": {
           "const": "Accessibility"
@@ -798,7 +793,6 @@
       "title": "子育て支援情報",
       "description": "子育て施設の場合、受け入れ年齢と一時預かりの有無の情報の登録を推奨。共通パーツを参照",
       "type": "object",
-      "x-suggested-name": "childCare",
       "properties": {
         "type": {
           "const": "ChildCare"
@@ -814,10 +808,8 @@
             },
             "childCareFee": {
               "title": "料金",
-              "x-partType": "PriceSpecification",
               "description": "有料の場合の料金",
               "type": "array",
-              "x-suggested-name": "priceSpecification",
               "items": {
                 "type": "object",
                 "properties": {
@@ -864,7 +856,6 @@
             },
             "childCareOpeningHours": {
               "title": "対応時間帯",
-              "x-partType": "OpeningHours",
               "description": "対応時間帯。施設等のサービス時間帯と異なる場合にOpeningHoursの形式で登録する",
               "type": "array",
               "items": {
