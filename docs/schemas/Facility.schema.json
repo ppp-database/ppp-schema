@@ -1017,7 +1017,9 @@
                             "type": "string"
                           }
                         }
-                      ]
+                      ],
+                      "minItems": 1,
+                      "maxItems": 2
                     }
                   }
                 }

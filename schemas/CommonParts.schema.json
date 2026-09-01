@@ -57,7 +57,9 @@
                       "items": [
                         { "title": "場所中分類", "type": "string" },
                         { "title": "場所小分類", "type": "array", "items": { "type": "string" } }
-                      ]
+                      ],
+                      "minItems": 1,
+                      "maxItems": 2
                     }
                   }
                 }
