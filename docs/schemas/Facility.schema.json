@@ -468,13 +468,13 @@
     "areaServed": {
       "title": "サービス担当区域",
       "type": "object",
-      "properties": {
-        "type": {
-          "const": "Array"
-        },
-        "value": {
-          "oneOf": [
-            {
+      "oneOf": [
+        {
+          "properties": {
+            "type": {
+              "const": "Array"
+            },
+            "value": {
               "type": "array",
               "items": {
                 "type": "object",
@@ -504,8 +504,20 @@
                   }
                 }
               }
+            }
+          },
+          "required": [
+            "type",
+            "value"
+          ],
+          "description": "この施設がサービスを提供する区域を町名などで示す。regionに都道府県、localityに市区町村、streetに町丁字を設定する。subRegion、locality、およびstreetを省略すると全域を指定したものと解釈される。次項のポリゴン方式とどちらか一つしか登録できない"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "geo:json"
             },
-            {
+            "value": {
               "type": "object",
               "properties": {
                 "type": {
@@ -526,16 +538,16 @@
                 "coordinates"
               ]
             }
-          ]
+          },
+          "required": [
+            "type",
+            "value"
+          ],
+          "description": "この施設がサービスを提供する区域をポリゴンで指定する。前項の町名方式とどちらか一つしか登録できない"
         }
-      },
-      "required": [
-        "type",
-        "value"
-      ],
-      "description": "この施設がサービスを提供する区域をポリゴンで指定する。前項とどちらかしか登録できない"
+      ]
     },
-    "areaServedaRemarks": {
+    "areaServedRemarks": {
       "title": "サービス担当区域備考",
       "type": "object",
       "required": [

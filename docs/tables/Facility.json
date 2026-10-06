@@ -193,13 +193,13 @@
     [
       "サービス担当区域",
       "areaServed",
-      "Array",
-      "1",
-      "この施設がサービスを提供する区域をポリゴンで指定する。前項とどちらかしか登録できない"
+      "Array / [Polygon](https://ppp-database.org/spec/parts/Polygon/)",
+      "* / 1",
+      ""
     ],
     [
       "サービス担当区域備考",
-      "areaServedaRemarks",
+      "areaServedRemarks",
       "Text",
       "1",
       ""
