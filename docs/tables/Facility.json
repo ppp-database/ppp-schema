@@ -198,6 +198,30 @@
       "この施設がサービスを提供する区域。町名などで示す方式（Array）とポリゴンで示す方式（geo:json）の二つを定義する。どちらか一つしか登録できない。【Array方式】regionに都道府県、localityに市区町村、streetに町丁字を設定する。subRegion・locality・streetを省略すると全域を指定したものと解釈される。【ポリゴン方式】GeoJSON Polygon形式で区域を指定する"
     ],
     [
+      "∟都道府県",
+      "∟region",
+      "Text",
+      "1"
+    ],
+    [
+      "∟-",
+      "∟subRegion",
+      "Array(StructuredValue)",
+      "*"
+    ],
+    [
+      "　∟市区町村",
+      "　∟locality",
+      "Text",
+      "1"
+    ],
+    [
+      "　∟町字以下",
+      "　∟street",
+      "Array(Text)",
+      "*"
+    ],
+    [
       "サービス担当区域備考",
       "areaServedRemarks",
       "Text",

@@ -116,13 +116,16 @@ def infer_type_and_occurrence(prop_schema: dict):
 
     if "oneOf" in prop_schema and "properties" not in prop_schema:
         types, occurrences = [], []
+        first_value_schema = None  # Array等、入れ子展開できる最初のvariantを使用
         for variant in prop_schema["oneOf"]:
-            t, occ, _, _ = infer_type_and_occurrence(variant)
+            t, occ, vs, _ = infer_type_and_occurrence(variant)
             types.append(t)
             occurrences.append(occ)
+            if vs is not None and first_value_schema is None:
+                first_value_schema = vs
         uniq_types = list(dict.fromkeys(types))
         uniq_occurrences = list(dict.fromkeys(occurrences))
-        return " / ".join(uniq_types), " / ".join(uniq_occurrences), None, None
+        return " / ".join(uniq_types), " / ".join(uniq_occurrences), first_value_schema, None
 
     props = prop_schema.get("properties")
     if props and "type" in props and "value" in props:
