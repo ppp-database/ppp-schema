@@ -164,7 +164,6 @@
           "additionalProperties": false
         }
       ],
-      "description": "観測活動を実施した日時です。開始と終了を明示する必要がある時は、2項目のArrayで開始日時・終了日時の順番で指定します。",
       "title": "実施日時"
     },
     "operator": {

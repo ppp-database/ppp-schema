@@ -449,7 +449,7 @@
             "value"
           ],
           "additionalProperties": false,
-          "description": "代表点などの点の座標をGeoJSON Point形式で登録します"
+          "description": "代表点などの点の座標をGeoJSON Point形式で登録します。次項のPolygon形式か、どちらか一つしか登録できません"
         },
         {
           "type": "object",
@@ -511,11 +511,10 @@
             "value"
           ],
           "additionalProperties": false,
-          "description": "多角形で土地の形状をGeoJSON Polygon形式で登録します。飛び地の表現にはMultiPolygon形式の追加定義が必要です"
+          "description": "多角形で土地の形状をGeoJSON Polygon形式で登録します。飛び地の表現にはMultiPolygon形式が必要ですが、現在は未サポートです差ボード化必要な場合は事務局に要求してください。前項のPoint形式か、どちらか一つしか登録できません"
         }
       ],
-      "title": "座標",
-      "description": "土地の座標点を登録します (注1)。代表点などの点の座標を登録する場合はPoint形式で、多角形で土地の形状を登録する場合はPolygon形式で登録します。飛び地を表現するにはMultiPoligon形式を追加定義する必要があります。必要な場合は事務局に連絡してください。"
+      "title": "座標"
     },
     "remarks": {
       "type": "object",
