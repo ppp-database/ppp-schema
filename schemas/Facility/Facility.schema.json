@@ -136,7 +136,6 @@
     },
     "areaServed": {
       "title": "サービス担当区域",
-      "description": "この施設がサービスを提供する区域。町名などで示す方式（Array）とポリゴンで示す方式（geo:json）の二つを定義する。どちらか一つしか登録できない。【Array方式】regionに都道府県、localityに市区町村、streetに町丁字を設定する。subRegion・locality・streetを省略すると全域を指定したものと解釈される。【ポリゴン方式】GeoJSON Polygon形式で区域を指定する",
       "type": "object",
       "oneOf": [
         {
@@ -177,7 +176,7 @@
             }
           },
           "required": ["type", "value"],
-          "description": "この施設がサービスを提供する区域を町名などで示す。regionに都道府県、localityに市区町村、streetに町丁字を設定する。subRegion、locality、およびstreetを省略すると全域を指定したものと解釈される。次項のポリゴン方式とどちらか一つしか登録できない"
+          "description": "この施設がサービスを提供する区域を町名などで示します。「都道府県(region)」に都道府県名を、「市区町村(locality)」に市区町村名を、「町字以下(street)」に町丁字以下を設定します。「subRegion」、「市区町村(locality)」、および「町字以下(street)」を省略すると全域を指定したものと解釈されます。次項のポリゴン方式とどちらか一つしか登録できません"
         },
         {
           "properties": {
@@ -204,7 +203,7 @@
             }
           },
           "required": ["type", "value"],
-          "description": "この施設がサービスを提供する区域をポリゴンで指定する。前項の町名方式とどちらか一つしか登録できない"
+          "description": "この施設がサービスを提供する区域をポリゴンで指定します。前項の町名方式とどちらか一つしか登録できません"
         }
       ]
     },
