@@ -33,10 +33,12 @@
     "dateOperation": {
       "oneOf": [
         {
-          "$ref": "../CommonParts.schema.json#/$defs/DateAttribute"
+          "$ref": "../CommonParts.schema.json#/$defs/DateAttribute",
+          "description": "点検等の実施日を単一の日付で指定します"
         },
         {
           "type": "object",
+          "description": "実施日が期間に渡る場合、開始日と終了日をArray形式の[date, date]で指定します",
           "properties": {
             "type": {
               "const": "Array"

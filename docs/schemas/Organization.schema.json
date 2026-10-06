@@ -73,8 +73,6 @@
       "description": "この項目は、法人に関する各種IDを並べて登録するための「箱」です。詳しくはtypeにあるリンク先の共通パーツを参照して下さい。法人番号の登録は必須です。これは、国内に限ればあらゆる法人の主キーとなるためです。政令市の場合、区のコードではなく法人である市のコードを登録します。この点、住所の情報である[PostalAddress](https://ppp-database.org/spec/parts/PostalAddress/)とは異なります"
     },
     "name": {
-      "title": "法人名",
-      "description": "法人の名称を設定する",
       "type": "object",
       "required": [
         "type",
@@ -88,11 +86,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "法人名",
+      "description": "法人の名称を設定する"
     },
     "containedInPlace": {
-      "title": "県名",
-      "description": "法人が基礎自治体、または東京都の特別区の場合は必須とし、都道府県名を記載する",
       "type": "object",
       "required": [
         "type",
@@ -106,11 +104,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "県名",
+      "description": "法人が基礎自治体、または東京都の特別区の場合は必須とし、都道府県名を記載する"
     },
     "nameKana": {
-      "title": "法人名カナ",
-      "description": "法人の名称のカナ表記を設定する",
       "type": "object",
       "required": [
         "type",
@@ -124,11 +122,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "法人名カナ",
+      "description": "法人の名称のカナ表記を設定する"
     },
     "nameEn": {
-      "title": "法人名英語",
-      "description": "法人の名称の英語表記を設定する",
       "type": "object",
       "required": [
         "type",
@@ -142,11 +140,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "法人名英語",
+      "description": "法人の名称の英語表記を設定する"
     },
     "organizationTypePosition": {
-      "title": "組織種別位置",
-      "description": "組織種別（株式会社等）を法人名の前後のどちらに付与するかを記載します",
       "type": "object",
       "required": [
         "type",
@@ -160,7 +158,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "組織種別位置",
+      "description": "組織種別（株式会社等）を法人名の前後のどちらに付与するかを記載します"
     },
     "category": {
       "allOf": [
@@ -224,8 +224,6 @@
       "description": "列挙型項目。”市区町村”、”都道府県”、”株式会社”などの区別を登録する。値は[OrganizationCategory](https://ppp-database.org/spec/enum/OrganizationCategory)を参照のこと。"
     },
     "alternateName": {
-      "title": "通称",
-      "description": "自治体の場合、”塩釜市”や”廣島市”など。略称のアルファベットも登録する",
       "type": "object",
       "properties": {
         "type": {
@@ -241,11 +239,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "通称",
+      "description": "自治体の場合、”塩釜市”や”廣島市”など。略称のアルファベットも登録する"
     },
     "status": {
-      "title": "活動状況",
-      "description": "活動状況（倒産、破産、休眠、休業、廃業等）を記載。",
       "type": "object",
       "required": [
         "type",
@@ -259,11 +257,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "活動状況",
+      "description": "活動状況（倒産、破産、休眠、休業、廃業等）を記載。"
     },
     "description": {
-      "title": "説明",
-      "description": "この組織に関する説明を記載",
       "type": "object",
       "required": [
         "type",
@@ -277,11 +275,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "説明",
+      "description": "この組織に関する説明を記載"
     },
     "url": {
-      "title": "url",
-      "description": "法人が開設しているWebサイトURLを記載。",
       "type": "object",
       "required": [
         "type",
@@ -296,11 +294,11 @@
           "format": "uri"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "url",
+      "description": "法人が開設しているWebサイトURLを記載。"
     },
     "numberOfRegularEmployees": {
-      "title": "正社員数",
-      "description": "正社員数を記載。この項目は変動する数値の項目であり、実装するのであれば誰が更新し続けるのかなどのルール策定が必要",
       "type": "object",
       "required": [
         "type",
@@ -314,11 +312,11 @@
           "type": "integer"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "正社員数",
+      "description": "正社員数を記載。この項目は変動する数値の項目であり、実装するのであれば誰が更新し続けるのかなどのルール策定が必要"
     },
     "numberOfEmployees": {
-      "title": "従業員数",
-      "description": "従業員数を記載。この項目は変動する数値の項目であり、実装するのであれば誰が更新し続けるのかなどのルール策定が必要",
       "type": "object",
       "required": [
         "type",
@@ -332,11 +330,11 @@
           "type": "integer"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "従業員数",
+      "description": "従業員数を記載。この項目は変動する数値の項目であり、実装するのであれば誰が更新し続けるのかなどのルール策定が必要"
     },
     "establishedDate": {
-      "title": "設立年月日",
-      "description": "設立日を記載",
       "type": "object",
       "required": [
         "type",
@@ -351,11 +349,11 @@
           "format": "date"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "設立年月日",
+      "description": "設立日を記載"
     },
     "yearOfEstablishment": {
-      "title": "創業年",
-      "description": "創業年を西暦YYYY形式で記載",
       "type": "object",
       "required": [
         "type",
@@ -369,11 +367,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "創業年",
+      "description": "創業年を西暦YYYY形式で記載"
     },
     "businessCategory": {
-      "title": "事業種目",
-      "description": "事業種目（[日本標準産業分類](https://www.soumu.go.jp/toukei_toukatsu/index/seido/sangyo/02toukatsu01_03000044.html)）を記載。　”都道府県機関”、”市町村機関”など",
       "type": "object",
       "properties": {
         "type": {
@@ -389,11 +387,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "事業種目",
+      "description": "事業種目（[日本標準産業分類](https://www.soumu.go.jp/toukei_toukatsu/index/seido/sangyo/02toukatsu01_03000044.html)）を記載。　”都道府県機関”、”市町村機関”など"
     },
     "fiscalYearStartDay": {
-      "title": "事業年度開始日",
-      "description": "年度開始日を”MM-DD”形式で記載。省略時には“04-01”を指定したと解釈する",
       "type": "object",
       "required": [
         "type",
@@ -407,11 +405,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "事業年度開始日",
+      "description": "年度開始日を”MM-DD”形式で記載。省略時には“04-01”を指定したと解釈する"
     },
     "capital": {
-      "title": "資本金",
-      "description": "資本金を記載。この項目が必要な場合は、更新の責任をだれが負うのかなどの運用と、通貨の属性の必要性について検討が必要",
       "type": "object",
       "required": [
         "type",
@@ -425,11 +423,11 @@
           "type": "integer"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "資本金",
+      "description": "資本金を記載。この項目が必要な場合は、更新の責任をだれが負うのかなどの運用と、通貨の属性の必要性について検討が必要"
     },
     "registeredAddress": {
-      "title": "登記住所",
-      "description": "法人の登記上の住所",
       "type": "object",
       "properties": {
         "type": {
@@ -478,11 +476,11 @@
         "type",
         "value"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "登記住所",
+      "description": "法人の登記上の住所"
     },
     "contactPoint": {
-      "title": "連絡先",
-      "description": "連絡先情報は法人と部門の両方にある。本項目は代表電話などを期待",
       "type": "object",
       "properties": {
         "type": {
@@ -499,8 +497,6 @@
                 "description": "対応できる言語を記述します。IETF BCP 47 standardに従います。日本語では“ja”です。"
               },
               "contactType": {
-                "title": "連絡先種別",
-                "description": "連絡の種別を記述します。列挙型項目であり、用語の定義は「[連絡先種別(ContactPointType)](https://ppp-database.org/spec/enum/ContactPointType/)」を参照してください。",
                 "type": "string",
                 "enum": [
                   "不具合連絡",
@@ -515,7 +511,9 @@
                   "警備": "警備関連の連絡先です",
                   "総合": "総合窓口の連絡先です。代表電話を含みます",
                   "その他": "その他の連絡先です"
-                }
+                },
+                "title": "連絡先種別",
+                "description": "連絡の種別を記述します。列挙型項目であり、用語の定義は「[連絡先種別(ContactPointType)](https://ppp-database.org/spec/enum/ContactPointType/)」を参照してください。"
               },
               "email": {
                 "title": "メールアドレス",
@@ -555,11 +553,11 @@
         "type",
         "value"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "連絡先",
+      "description": "連絡先情報は法人と部門の両方にある。本項目は代表電話などを期待"
     },
     "refFacility": {
-      "title": "施設ID",
-      "description": "民間企業の本社や自治体の本庁舎が実際に存在する施設へのリンクです。このリンクを経由して法人の住所情報が得られます。継承元のコア・データモデルに倣い必須としています。尚、業務上住所情報が不要な法人を登録する場合は必ずしも登録は必須ではありません。",
       "type": "object",
       "required": [
         "type",
@@ -575,11 +573,11 @@
           "x-refType": "Facility"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "施設ID",
+      "description": "民間企業の本社や自治体の本庁舎が実際に存在する施設へのリンクです。このリンクを経由して法人の住所情報が得られます。継承元のコア・データモデルに倣い必須としています。尚、業務上住所情報が不要な法人を登録する場合は必ずしも登録は必須ではありません。"
     },
     "architectOfficeRegNumber": {
-      "title": "事務所登録番号",
-      "description": "12条点検において、調査者や検査者の勤務先が建築士事務所のときに事務所登録番号を”○○知事登録第○○号”の形式で登録します。但し、本項目は統計分析やオープンデータに適さない可能性がありますので、蓄積するデータの目的に従って登録の要否を判断する必要があります。",
       "type": "object",
       "required": [
         "type",
@@ -593,7 +591,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "事務所登録番号",
+      "description": "12条点検において、調査者や検査者の勤務先が建築士事務所のときに事務所登録番号を”○○知事登録第○○号”の形式で登録します。但し、本項目は統計分析やオープンデータに適さない可能性がありますので、蓄積するデータの目的に従って登録の要否を判断する必要があります。"
     }
   },
   "required": [

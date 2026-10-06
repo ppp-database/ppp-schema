@@ -14,8 +14,6 @@
       "description": "必ず“Device”の文字列でなくてはならない決まりです。NGSI V2に準拠しない場合は不要です。"
     },
     "areaServed": {
-      "title": "提供領域",
-      "description": "設備の提供領域を登録します。例えば照明機器や空調機器であれば“図書室”や“職員室”などと記載します。不具合時に影響を受ける場所です",
       "type": "object",
       "required": [
         "type",
@@ -29,7 +27,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "提供領域",
+      "description": "設備の提供領域を登録します。例えば照明機器や空調機器であれば“図書室”や“職員室”などと記載します。不具合時に影響を受ける場所です"
     },
     "category": {
       "allOf": [
@@ -1015,8 +1015,6 @@
       "description": "設備の種別です。列挙型項目であり、用語の定義は「[施設の部位(BuildingComponent)](https://ppp-database.org/spec/enum/BuildingComponent/)」を参照してください。本Attributeは「[機種(DeviceModel)](https://ppp-database.org/spec/datamodel/DeviceModel/)」と重複しています。「機種(DeviceModel)」をリンクする場合には、この項目の登録は不要です。"
     },
     "controlledAsset": {
-      "title": "対象部位",
-      "description": "検知・制御・計測する対象の部位です。部位や例えば“プール”。controlledPropertyと合わせて、プールの水位を監視するセンサであるなどと表現します。更に、「部位」として空間を登録しておくと、音楽室の空間の温湿度を計測するセンサなども表現できます。",
       "type": "object",
       "properties": {
         "type": {
@@ -1032,7 +1030,9 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "対象部位",
+      "description": "検知・制御・計測する対象の部位です。部位や例えば“プール”。controlledPropertyと合わせて、プールの水位を監視するセンサであるなどと表現します。更に、「部位」として空間を登録しておくと、音楽室の空間の温湿度を計測するセンサなども表現できます。"
     },
     "controlledProperty": {
       "allOf": [
@@ -1366,8 +1366,6 @@
       "description": "検知・制御・計測する対象。列挙型項目であり、用語の定義は「[制御対象(ControlledProperty)](https://ppp-database.org/spec/enum/ControlledProperty/)」を参照して下さい。例えば“水位”、“温度”など。本項目は、継承元のSmart Data Modelsに合わせて回数を1以上としていますが、実際にこの項目を利用するかどうかは個別に判断してください。また、本AttributeはDeviceModelと重複しています。DeviceModelをリンクする場合には、必要性は低いと考えます。"
     },
     "dateInstalled": {
-      "title": "設置日",
-      "description": "設置した日付です。",
       "type": "object",
       "required": [
         "type",
@@ -1382,11 +1380,11 @@
           "format": "date"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "設置日",
+      "description": "設置した日付です。"
     },
     "dateManufactured": {
-      "title": "製造日",
-      "description": "製造年月日です。",
       "type": "object",
       "required": [
         "type",
@@ -1401,11 +1399,11 @@
           "format": "date"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "製造日",
+      "description": "製造年月日です。"
     },
     "description": {
-      "title": "説明",
-      "description": "設備情報として公開可能な詳細情報です。",
       "type": "object",
       "required": [
         "type",
@@ -1419,11 +1417,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "説明",
+      "description": "設備情報として公開可能な詳細情報です。"
     },
     "name": {
-      "title": "設備名称",
-      "description": "設備に他と区別すべき名称が付いている場合に、名称を設定します。例えば、手順書や各種案内文で用いる名称で、前記の設備IDと異なり設備を入れ替えても変わらない名前が望ましいです。“消火栓”、“AED”、“非常用発電機”など。一般名称である必要は無く、例えば“消火栓2F-01”や“2F-lib-AC-01”などと、関係者に分かる名称でも構いません",
       "type": "object",
       "required": [
         "type",
@@ -1437,11 +1435,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "設備名称",
+      "description": "設備に他と区別すべき名称が付いている場合に、名称を設定します。例えば、手順書や各種案内文で用いる名称で、前記の設備IDと異なり設備を入れ替えても変わらない名前が望ましいです。“消火栓”、“AED”、“非常用発電機”など。一般名称である必要は無く、例えば“消火栓2F-01”や“2F-lib-AC-01”などと、関係者に分かる名称でも構いません"
     },
     "nameKana": {
-      "title": "設備名称カナ",
-      "description": "設備の名称のカナ表記を設定します。",
       "type": "object",
       "required": [
         "type",
@@ -1455,11 +1453,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "設備名称カナ",
+      "description": "設備の名称のカナ表記を設定します。"
     },
     "nameEn": {
-      "title": "設備名称英語",
-      "description": "設備の名称の米国英語表記を設定します。",
       "type": "object",
       "required": [
         "type",
@@ -1473,11 +1471,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "設備名称英語",
+      "description": "設備の名称の米国英語表記を設定します。"
     },
     "pricePurchased": {
-      "title": "購入価格",
-      "description": "購入価格 (円単位)です。",
       "type": "object",
       "required": [
         "type",
@@ -1491,11 +1489,11 @@
           "type": "number"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "購入価格",
+      "description": "購入価格 (円単位)です。"
     },
     "refDeviceModel": {
-      "title": "機種ID",
-      "description": "機器のモデル情報である[DeviceModelのEntity](https://ppp-database.org/spec/datamodel/DeviceModel/)へのリンクです。",
       "type": "object",
       "required": [
         "type",
@@ -1511,11 +1509,11 @@
           "x-refType": "DeviceModel"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "機種ID",
+      "description": "機器のモデル情報である[DeviceModelのEntity](https://ppp-database.org/spec/datamodel/DeviceModel/)へのリンクです。"
     },
     "refFacility": {
-      "title": "施設ID",
-      "description": "設置している対象の施設へのリンクです。設置している施設の施設IDを格納します。",
       "type": "object",
       "required": [
         "type",
@@ -1531,11 +1529,11 @@
           "x-refType": "Facility"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "施設ID",
+      "description": "設置している対象の施設へのリンクです。設置している施設の施設IDを格納します。"
     },
     "refBuilding": {
-      "title": "建物ID",
-      "description": "設置している対象の建物へのリンクです。設置している建物の建物IDを格納します。尚、施設の存続期間中に建物を建て替えた場合、リンク先の建物は施設からリンクされない建物となります。これは、建物解体後も分析等にデータを供するためのルールです。",
       "type": "object",
       "required": [
         "type",
@@ -1551,11 +1549,11 @@
           "x-refType": "Building"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "建物ID",
+      "description": "設置している対象の建物へのリンクです。設置している建物の建物IDを格納します。尚、施設の存続期間中に建物を建て替えた場合、リンク先の建物は施設からリンクされない建物となります。これは、建物解体後も分析等にデータを供するためのルールです。"
     },
     "remarks": {
-      "title": "備考",
-      "description": "備考です。",
       "type": "object",
       "required": [
         "type",
@@ -1569,11 +1567,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "備考",
+      "description": "備考です。"
     },
     "serialNumber": {
-      "title": "製造番号",
-      "description": "製造番号(シリアルナンバー)を登録します。",
       "type": "object",
       "required": [
         "type",
@@ -1587,11 +1585,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "製造番号",
+      "description": "製造番号(シリアルナンバー)を登録します。"
     },
     "status": {
-      "title": "ステータス",
-      "description": "「稼働中」、「故障中」などのステータス。一般に設備は建物より寿命が短く交換する場合があります。交換後もデータ分析等のためにデータを残しておく運用の場合はこの項目で「稼働停止」などと登録し、区別がつく様にします。尚、この項目は用語が定義されていません。用語のニーズがある場合には事務局に連絡してください。",
       "type": "object",
       "required": [
         "type",
@@ -1605,11 +1603,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "ステータス",
+      "description": "「稼働中」、「故障中」などのステータス。一般に設備は建物より寿命が短く交換する場合があります。交換後もデータ分析等のためにデータを残しておく運用の場合はこの項目で「稼働停止」などと登録し、区別がつく様にします。尚、この項目は用語が定義されていません。用語のニーズがある場合には事務局に連絡してください。"
     },
     "url": {
-      "title": "URL",
-      "description": "設置場所写真などのURLを登録します。",
       "type": "object",
       "required": [
         "type",
@@ -1624,11 +1622,11 @@
           "format": "uri"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "URL",
+      "description": "設置場所写真などのURLを登録します。"
     },
     "zoneInstalled": {
-      "title": "場所",
-      "description": "設置した場所です。「建物(Building)」または「施設(Facility)」で定義したZonesの名称の配列で記載します。例えば[“校舎”,“2F”,“1年C組”]です。",
       "type": "object",
       "required": [
         "type",
@@ -1656,11 +1654,11 @@
           ],
           "maxItems": 3
         }
-      }
+      },
+      "title": "場所",
+      "description": "設置した場所です。「建物(Building)」または「施設(Facility)」で定義したZonesの名称の配列で記載します。例えば[“校舎”,“2F”,“1年C組”]です。"
     },
     "zoneRemarks": {
-      "title": "場所備考",
-      "description": "前項の補足情報を記入します。例えば、前項の値が[“校舎”,“2F”,“1年C組”]である時に、更に天井である事を明示したい場合は“天井”を記入します。",
       "type": "object",
       "required": [
         "type",
@@ -1674,7 +1672,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "場所備考",
+      "description": "前項の補足情報を記入します。例えば、前項の値が[“校舎”,“2F”,“1年C組”]である時に、更に天井である事を明示したい場合は“天井”を記入します。"
     }
   },
   "required": [

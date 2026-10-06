@@ -312,8 +312,6 @@
       "title": "現象"
     },
     "dataProvider": {
-      "title": "プロバイダ",
-      "description": "データのプロバイダのidです。このWGが想定する業務では関係しないと考えます。",
       "type": "object",
       "required": [
         "type",
@@ -327,11 +325,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "プロバイダ",
+      "description": "データのプロバイダのidです。このWGが想定する業務では関係しないと考えます。"
     },
     "description": {
-      "title": "説明",
-      "description": "説明を登録します。",
       "type": "object",
       "required": [
         "type",
@@ -345,11 +343,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "説明",
+      "description": "説明を登録します。"
     },
     "isFiledTo": {
-      "title": "提出先",
-      "description": "苦情をエスカレーションする先。例えば自治体の所管課など。",
       "type": "object",
       "required": [
         "type",
@@ -363,11 +361,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "提出先",
+      "description": "苦情をエスカレーションする先。例えば自治体の所管課など。"
     },
     "isMadeBy": {
-      "title": "依頼者",
-      "description": "この苦情を申し立てたユーザーの ID。個人情報にならない様に留意が必要。例えば、定期検査による検出はこの項目を記入するが、個人や利用者団体は記入しないなど。",
       "type": "object",
       "required": [
         "type",
@@ -381,11 +379,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "依頼者",
+      "description": "この苦情を申し立てたユーザーの ID。個人情報にならない様に留意が必要。例えば、定期検査による検出はこの項目を記入するが、個人や利用者団体は記入しないなど。"
     },
     "isPartOf": {
-      "title": "関連案件ID",
-      "description": "ひとつの不具合が複数の「案件」から構成される場合などにこの項目で相互参照したり階層化したりします。各「案件」は基本的に「報告」からリンクされますが、「報告」登録後に追加で「案件」を追加登録されるケースも想定されます。その場合は追加登録した「案件」からこの「関連案件ID」で元の「案件」をリンクする事で、間接的に「報告」と結びつけます。",
       "type": "object",
       "properties": {
         "type": {
@@ -401,18 +399,17 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "関連案件ID",
+      "description": "ひとつの不具合が複数の「案件」から構成される場合などにこの項目で相互参照したり階層化したりします。各「案件」は基本的に「報告」からリンクされますが、「報告」登録後に追加で「案件」を追加登録されるケースも想定されます。その場合は追加登録した「案件」からこの「関連案件ID」で元の「案件」をリンクする事で、間接的に「報告」と結びつけます。"
     },
     "location": {
-      "title": "座標",
-      "description": "不具合の発生個所を座標で示します。例えば、道路の陥没、河川の汚染、街角の異臭などの広い範囲で場所を特定することを想定しています。施設管理の局面で必要性は低いと考えます。",
       "type": "object",
       "properties": {
         "type": {
           "const": "geo:json"
         },
         "value": {
-          "title": "座標",
           "type": "object",
           "properties": {
             "type": {
@@ -447,18 +444,19 @@
           "required": [
             "type",
             "coordinates"
-          ]
+          ],
+          "title": "座標"
         }
       },
       "required": [
         "type",
         "value"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "座標",
+      "description": "不具合の発生個所を座標で示します。例えば、道路の陥没、河川の汚染、街角の異臭などの広い範囲で場所を特定することを想定しています。施設管理の局面で必要性は低いと考えます。"
     },
     "name": {
-      "title": "案件名",
-      "description": "案件の名称を登録します。",
       "type": "object",
       "required": [
         "type",
@@ -472,11 +470,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "案件名",
+      "description": "案件の名称を登録します。"
     },
     "seeAlso": {
-      "title": "追加情報",
-      "description": "追加情報のurlを登録します。",
       "type": "object",
       "required": [
         "type",
@@ -491,11 +489,11 @@
           "format": "uri"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "追加情報",
+      "description": "追加情報のurlを登録します。"
     },
     "source": {
-      "title": "提供元",
-      "description": "この情報の提供元に関するurl等を格納します。",
       "type": "object",
       "required": [
         "type",
@@ -509,7 +507,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "提供元",
+      "description": "この情報の提供元に関するurl等を格納します。"
     },
     "status": {
       "allOf": [
@@ -557,15 +557,15 @@
             "type": "object",
             "properties": {
               "step": {
-                "title": "ステップ",
-                "description": "手順内のステップの名称を登録します。例えば、“発生”、“調査予定”、“調査実施”、“作業予定”、“作業実施”、“完了届出”、“完了承認”などです。同じ名称のタイムスタンプが複数登録されても構いません。列挙型項目でありませんが、一部の用語を定義しています。用語の定義は「[案件ステップ(ComplaintStep)](https://ppp-database.org/spec/enum/ComplaintStep/)」を参照してください。",
                 "type": "string",
                 "x-enumDescription": "この属性は列挙型項目ではなく、値に制約は設けない。以下のx-enumDescriptionsは代表的な用語の定義であり、必要に応じて他の用語も使用できる。",
                 "x-enumDescriptions": {
                   "発生": "以下のステップの情報である事を示します。\n・不具合が発生した際の情報\n・不具合の発生時期が不明である場合は最初に不具合を認識した際の情報。例えば、最初の報告を行った時など",
                   "完了": "以下のステップである事を示します。どの状況であっても、オーナーの承認が得られている必要があります。\n・修繕が完了し、修繕の完了をオーナーが承認された\n・不具合が見つからなかった。つまり、「案件(Complaint)」の「現象(phenomenon)」が“良好”である\n・修繕を行わない事が承認された\n・今後の作業や承認条件が決まらない事が承認された。例えば、完了条件や完了判断時期などが無い“経過観察”など",
                   "(その他)": "“発生”および“完了”以外の文字列が登録されたときには、“発生”から“完了”に至るまでの間のステップの情報である事を示しています。"
-                }
+                },
+                "title": "ステップ",
+                "description": "手順内のステップの名称を登録します。例えば、“発生”、“調査予定”、“調査実施”、“作業予定”、“作業実施”、“完了届出”、“完了承認”などです。同じ名称のタイムスタンプが複数登録されても構いません。列挙型項目でありませんが、一部の用語を定義しています。用語の定義は「[案件ステップ(ComplaintStep)](https://ppp-database.org/spec/enum/ComplaintStep/)」を参照してください。"
               },
               "timestamp": {
                 "title": "日時",
@@ -589,8 +589,6 @@
       "title": "経緯"
     },
     "refFacility": {
-      "title": "施設ID",
-      "description": "案件の対象となる施設(Facility)に対するリンクです。FacilityのEntity idを格納します。refFacilityかrefBuildingのどちらかを必ず登録します。施設からBuildingを辿ることができます。",
       "type": "object",
       "required": [
         "type",
@@ -606,11 +604,11 @@
           "x-refType": "Facility"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "施設ID",
+      "description": "案件の対象となる施設(Facility)に対するリンクです。FacilityのEntity idを格納します。refFacilityかrefBuildingのどちらかを必ず登録します。施設からBuildingを辿ることができます。"
     },
     "refBuilding": {
-      "title": "建物ID",
-      "description": "案件の対象となる建物(Building)に対するリンクです。BuildingのEntity idを格納します。refFacilityかrefBuildingのどちらかを必ず登録します。",
       "type": "object",
       "required": [
         "type",
@@ -626,7 +624,9 @@
           "x-refType": "Building"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "建物ID",
+      "description": "案件の対象となる建物(Building)に対するリンクです。BuildingのEntity idを格納します。refFacilityかrefBuildingのどちらかを必ず登録します。"
     },
     "zones": {
       "type": "object",
@@ -638,7 +638,6 @@
           "type": "object",
           "properties": {
             "abstracts": {
-              "description": "列挙メンバは建物(Building)または施設(Facility)のZonesから選択した文字列です。このArrayは順序に意味を持ち(順序付きリスト)、zoneName、subzoneNameの第一要素、subzoneNameの第二要素の順番に登録します。例えば、[“校舎”,“2F”,“1年A組”]となります",
               "type": "array",
               "items": [
                 {
@@ -654,7 +653,8 @@
                   "type": "string"
                 }
               ],
-              "maxItems": 3
+              "maxItems": 3,
+              "description": "列挙メンバは建物(Building)または施設(Facility)のZonesから選択した文字列です。このArrayは順序に意味を持ち(順序付きリスト)、zoneName、subzoneNameの第一要素、subzoneNameの第二要素の順番に登録します。例えば、[“校舎”,“2F”,“1年A組”]となります"
             },
             "remarks": {
               "title": "場所補足",
@@ -722,8 +722,6 @@
           "type": "object",
           "properties": {
             "abstracts": {
-              "title": "原因概要",
-              "description": "原因の概要を登録します。列挙型項目であり、用語の定義は「[原因(Cause)](https://ppp-database.org/spec/enum/Cause/)」を参照して下さい。例えば“車両事故”、“地震”など。",
               "type": "string",
               "enum": [
                 "天災(豪雨・落雷等)",
@@ -764,7 +762,9 @@
                 "緑地の繁茂": "対象物が緑地であるときに、手入れの不足などの要因により過剰な繁茂に至った。",
                 "使用消耗": "潤滑油の油量など、正常稼働により消耗が予定されている消耗。",
                 "その他": "これを選択した時には、具体的な部位は文で補足として追記する必要があります。"
-              }
+              },
+              "title": "原因概要",
+              "description": "原因の概要を登録します。列挙型項目であり、用語の定義は「[原因(Cause)](https://ppp-database.org/spec/enum/Cause/)」を参照して下さい。例えば“車両事故”、“地震”など。"
             },
             "remarks": {
               "title": "原因補足",
@@ -823,8 +823,6 @@
       "description": "不具合に対する緊急性を示すマークを登録します。列挙型項目であり、用語の定義は「[不具合の緊急性(ComplaintSeverity)](https://ppp-database.org/spec/enum/ComplaintSeverity/)」をご覧ください。"
     },
     "severity": {
-      "title": "緊急度補足",
-      "description": "不具合に対する処置の緊急性を登録します。緊急度マーク(severityMark)に対する補足の位置づけとなります。例えば“放置すると機能不全に至る可能性あり”、“施設運営に影響あり”など。",
       "type": "object",
       "required": [
         "type",
@@ -838,11 +836,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "緊急度補足",
+      "description": "不具合に対する処置の緊急性を登録します。緊急度マーク(severityMark)に対する補足の位置づけとなります。例えば“放置すると機能不全に至る可能性あり”、“施設運営に影響あり”など。"
     },
     "repairPlan": {
-      "title": "修繕計画",
-      "description": "処置の計画です。“部品交換”などと記載します。修繕する場所が「場所(zones)」と異なる場合は修繕した場所も記載します。また、修繕が複数の工程や複数の箇所に及ぶ場合は、出来る限りそれぞれの箇所や修繕内容が分かる様に記述します。",
       "type": "object",
       "required": [
         "type",
@@ -856,7 +854,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "修繕計画",
+      "description": "処置の計画です。“部品交換”などと記載します。修繕する場所が「場所(zones)」と異なる場合は修繕した場所も記載します。また、修繕が複数の工程や複数の箇所に及ぶ場合は、出来る限りそれぞれの箇所や修繕内容が分かる様に記述します。"
     }
   },
   "required": [

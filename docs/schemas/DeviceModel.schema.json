@@ -14,8 +14,6 @@
       "description": "必ず”DeviceModel”の文字列でなくてはならない決まりです。NGSI V2に準拠しない場合は不要です。"
     },
     "alternateName": {
-      "title": "通称",
-      "description": "通称を入れます(もしあれば)。",
       "type": "object",
       "required": [
         "type",
@@ -29,11 +27,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "通称",
+      "description": "通称を入れます(もしあれば)。"
     },
     "annotations": {
-      "title": "注釈",
-      "description": "設備に関する注釈です。",
       "type": "object",
       "properties": {
         "type": {
@@ -49,11 +47,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "注釈",
+      "description": "設備に関する注釈です。"
     },
     "brandName": {
-      "title": "ブランド名",
-      "description": "機器のブランド名を設定します。例えば”しろくまくん”など。",
       "type": "object",
       "required": [
         "type",
@@ -67,7 +65,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "ブランド名",
+      "description": "機器のブランド名を設定します。例えば”しろくまくん”など。"
     },
     "category": {
       "allOf": [
@@ -1057,8 +1057,6 @@
       "description": "設備の種別です。列挙型項目であり、用語の定義は「[施設の部位(BuildingComponent)](https://ppp-database.org/spec/enum/BuildingComponent/)」を参照してください。尚、設備の種別が階層化されているときは、高位の階層から順番に登録します。"
     },
     "color": {
-      "title": "色",
-      "description": "機器の色を登録します。例えば”白”など",
       "type": "object",
       "required": [
         "type",
@@ -1072,7 +1070,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "色",
+      "description": "機器の色を登録します。例えば”白”など"
     },
     "controlledProperty": {
       "allOf": [
@@ -1406,8 +1406,6 @@
       "description": "検知・制御・計測する対象です。列挙型項目であり、用語の定義は「[制御対象(ControlledProperty)](https://ppp-database.org/spec/enum/ControlledProperty/)」を参照してください。例えば”水位”、”温度”など。"
     },
     "dataProvider": {
-      "title": "プロバイダ",
-      "description": "このEntityに対するプロバイダを特定する文字列です。",
       "type": "object",
       "required": [
         "type",
@@ -1421,11 +1419,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "プロバイダ",
+      "description": "このEntityに対するプロバイダを特定する文字列です。"
     },
     "description": {
-      "title": "説明",
-      "description": "機種情報として公開可能な詳細情報です。",
       "type": "object",
       "required": [
         "type",
@@ -1439,11 +1437,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "説明",
+      "description": "機種情報として公開可能な詳細情報です。"
     },
     "deviceClass": {
-      "title": "クラス",
-      "description": "制約条件付きデバイス(constrained device)のクラスです。RFC7228で規定。制約条件付きデバイスではない場合、意味を持ちません",
       "type": "object",
       "required": [
         "type",
@@ -1457,11 +1455,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "クラス",
+      "description": "制約条件付きデバイス(constrained device)のクラスです。RFC7228で規定。制約条件付きデバイスではない場合、意味を持ちません"
     },
     "documentation": {
-      "title": "ドキュメント",
-      "description": "デバイスのドキュメントに対するリンクです。",
       "type": "object",
       "required": [
         "type",
@@ -1476,11 +1474,11 @@
           "format": "uri"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "ドキュメント",
+      "description": "デバイスのドキュメントに対するリンクです。"
     },
     "energyLimitationClass": {
-      "title": "エネルギークラス",
-      "description": "これも、デバイスのクラスです。RFC7228で規定されています",
       "type": "object",
       "required": [
         "type",
@@ -1494,11 +1492,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "エネルギークラス",
+      "description": "これも、デバイスのクラスです。RFC7228で規定されています"
     },
     "function": {
-      "title": "機能",
-      "description": "デバイスの機能です。SAREFで規定されており、levelControl, sensing, onOff, openClose, metering, eventNotificationなどがあります。",
       "type": "object",
       "properties": {
         "type": {
@@ -1514,11 +1512,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "機能",
+      "description": "デバイスの機能です。SAREFで規定されており、levelControl, sensing, onOff, openClose, metering, eventNotificationなどがあります。"
     },
     "image": {
-      "title": "写真",
-      "description": "デバイスの写真等のurlです。",
       "type": "object",
       "required": [
         "type",
@@ -1533,11 +1531,11 @@
           "format": "uri"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "写真",
+      "description": "デバイスの写真等のurlです。"
     },
     "manufacturerName": {
-      "title": "メーカ名",
-      "description": "メーカ名を登録します。例えば”日立製作所”など。",
       "type": "object",
       "required": [
         "type",
@@ -1551,11 +1549,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "メーカ名",
+      "description": "メーカ名を登録します。例えば”日立製作所”など。"
     },
     "modelName": {
-      "title": "モデル名",
-      "description": "機器のモデル名を登録します。例えば“RAS-DM28KE8”など。",
       "type": "object",
       "required": [
         "type",
@@ -1569,11 +1567,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "モデル名",
+      "description": "機器のモデル名を登録します。例えば“RAS-DM28KE8”など。"
     },
     "name": {
-      "title": "機種名",
-      "description": "機種に個別に名称が付いているときに、その名称を登録します。",
       "type": "object",
       "required": [
         "type",
@@ -1587,11 +1585,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "機種名",
+      "description": "機種に個別に名称が付いているときに、その名称を登録します。"
     },
     "owner": {
-      "title": "所有者",
-      "description": "所有者のidです。一般的にはこの項目は使いません。",
       "type": "object",
       "properties": {
         "type": {
@@ -1607,11 +1605,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "所有者",
+      "description": "所有者のidです。一般的にはこの項目は使いません。"
     },
     "seeAlso": {
-      "title": "追加情報",
-      "description": "追加情報のURIを格納します。つまり、idやurlが入ります。",
       "type": "object",
       "properties": {
         "type": {
@@ -1627,11 +1625,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "追加情報",
+      "description": "追加情報のURIを格納します。つまり、idやurlが入ります。"
     },
     "serviceLife": {
-      "title": "耐用年数",
-      "description": "耐用年数です。会計上、税務上の耐用年数ではなく、実際に利用可能な年数です",
       "type": "object",
       "required": [
         "type",
@@ -1645,11 +1643,11 @@
           "type": "number"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "耐用年数",
+      "description": "耐用年数です。会計上、税務上の耐用年数ではなく、実際に利用可能な年数です"
     },
     "source": {
-      "title": "データー提供者",
-      "description": "データ提供者のurlです。",
       "type": "object",
       "required": [
         "type",
@@ -1664,11 +1662,11 @@
           "format": "uri"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "データー提供者",
+      "description": "データ提供者のurlです。"
     },
     "supportedProtocol": {
-      "title": "プロトコル",
-      "description": "サポートしているプロトコルです。",
       "type": "object",
       "properties": {
         "type": {
@@ -1684,11 +1682,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "プロトコル",
+      "description": "サポートしているプロトコルです。"
     },
     "supportedUnits": {
-      "title": "精度",
-      "description": "サポートしている測定値の精度です。",
       "type": "object",
       "properties": {
         "type": {
@@ -1704,7 +1702,9 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "精度",
+      "description": "サポートしている測定値の精度です。"
     }
   },
   "required": [

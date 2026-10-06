@@ -69,11 +69,12 @@
     "performedAt": {
       "oneOf": [
         {
-          "$ref": "../CommonParts.schema.json#/$defs/DateTimeAttribute"
+          "$ref": "../CommonParts.schema.json#/$defs/DateTimeAttribute",
+          "description": "観測活動を実施した日時を単一のDateTimeで指定します"
         },
         {
           "type": "object",
-          "description": "Standard NGSI Array Attribute for a DateTime range",
+          "description": "開始と終了を明示する場合、2項目のArrayで開始日時・終了日時の順番で指定します",
           "required": [
             "type",
             "value"

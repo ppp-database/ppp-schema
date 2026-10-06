@@ -997,8 +997,6 @@
       "description": "部位の種別です。列挙型項目であり、用語の定義は[BuildingComponent](https://ppp-database.org/spec/enum/BuildingComponent/)を参照してください"
     },
     "name": {
-      "title": "部位名称",
-      "description": "部位に他と区別すべき名称が付いている場合に、名称を設定します。例えば、手順書や各種案内文で用いる名称で、前記の部位IDと異なり改築等で部位を入れ替えても変わらない名前が望ましいです。名称は”中央階段”、”職員門扉”などの様に利用者が使う名称を用いても、“〇小-1F-空調-A01”などの様に管理上の名称でも仕様上は構いません。",
       "type": "object",
       "required": [
         "type",
@@ -1012,11 +1010,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "部位名称",
+      "description": "部位に他と区別すべき名称が付いている場合に、名称を設定します。例えば、手順書や各種案内文で用いる名称で、前記の部位IDと異なり改築等で部位を入れ替えても変わらない名前が望ましいです。名称は”中央階段”、”職員門扉”などの様に利用者が使う名称を用いても、“〇小-1F-空調-A01”などの様に管理上の名称でも仕様上は構いません。"
     },
     "nameKana": {
-      "title": "部位名称カナ",
-      "description": "部位の名称のカナ表記を設定します。",
       "type": "object",
       "required": [
         "type",
@@ -1030,11 +1028,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "部位名称カナ",
+      "description": "部位の名称のカナ表記を設定します。"
     },
     "nameEn": {
-      "title": "部位名称英語",
-      "description": "部位の名称の米国英語表記を設定します。",
       "type": "object",
       "required": [
         "type",
@@ -1048,11 +1046,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "部位名称英語",
+      "description": "部位の名称の米国英語表記を設定します。"
     },
     "description": {
-      "title": "説明",
-      "description": "部位情報として公開可能な詳細情報です。",
       "type": "object",
       "required": [
         "type",
@@ -1066,11 +1064,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "説明",
+      "description": "部位情報として公開可能な詳細情報です。"
     },
     "status": {
-      "title": "ステータス",
-      "description": "「稼働中」、「故障中」などのステータスです。この項目を利用する場合は、更新責任をだれが担うかなどのルールの策定が必要です",
       "type": "object",
       "required": [
         "type",
@@ -1084,11 +1082,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "ステータス",
+      "description": "「稼働中」、「故障中」などのステータスです。この項目を利用する場合は、更新責任をだれが担うかなどのルールの策定が必要です"
     },
     "refFacility": {
-      "title": "施設ID",
-      "description": "設置している対象の施設へのリンクです。施設管理業務においては、施設全体を表す「施設 (Facility)」または、施設にテナントとして入居するテナント施設の「施設 (Facility)」をリンクします。尚、テナント施設からは「主施設ID(facilityParent)」という項目により、施設全体の情報を辿る事ができます。",
       "type": "object",
       "required": [
         "type",
@@ -1104,11 +1102,11 @@
           "x-refType": "Facility"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "施設ID",
+      "description": "設置している対象の施設へのリンクです。施設管理業務においては、施設全体を表す「施設 (Facility)」または、施設にテナントとして入居するテナント施設の「施設 (Facility)」をリンクします。尚、テナント施設からは「主施設ID(facilityParent)」という項目により、施設全体の情報を辿る事ができます。"
     },
     "refBuilding": {
-      "title": "建物ID",
-      "description": "この部位が属する対象の建物へのリンクです。12条点検などの公的点検では部位や設備の不具合は棟毎に分けて報告する仕様になっているためこの項目があります。",
       "type": "object",
       "required": [
         "type",
@@ -1124,11 +1122,11 @@
           "x-refType": "Building"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "建物ID",
+      "description": "この部位が属する対象の建物へのリンクです。12条点検などの公的点検では部位や設備の不具合は棟毎に分けて報告する仕様になっているためこの項目があります。"
     },
     "url": {
-      "title": "url",
-      "description": "設置場所写真などURLです",
       "type": "object",
       "required": [
         "type",
@@ -1143,11 +1141,11 @@
           "format": "uri"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "url",
+      "description": "設置場所写真などURLです"
     },
     "remarks": {
-      "title": "備考",
-      "description": "備考を登録する項目です",
       "type": "object",
       "required": [
         "type",
@@ -1161,11 +1159,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "備考",
+      "description": "備考を登録する項目です"
     },
     "zoneInstalled": {
-      "title": "場所",
-      "description": "部位がある場所です。「[建物(Building)](https://ppp-database.org/spec/datamodel/Building/)」または「[施設(Facility)](https://ppp-database.org/spec/datamodel/Facility/)」で定義した「場所(Zones)」の名称の配列で記載します。例えば[“校舎”, “2F”,“1年C組”]です。",
       "type": "object",
       "required": [
         "type",
@@ -1193,11 +1191,11 @@
           ],
           "maxItems": 3
         }
-      }
+      },
+      "title": "場所",
+      "description": "部位がある場所です。「[建物(Building)](https://ppp-database.org/spec/datamodel/Building/)」または「[施設(Facility)](https://ppp-database.org/spec/datamodel/Facility/)」で定義した「場所(Zones)」の名称の配列で記載します。例えば[“校舎”, “2F”,“1年C組”]です。"
     },
     "zoneRemarks": {
-      "title": "場所備考",
-      "description": "前項の補足情報を記入します。例えば”内壁”の部位情報で、前項の値が[“校舎”, “2F”,“1年C組”]である時に、更に南側の内壁である事を明示したい場合は“南側”などと記入します。",
       "type": "object",
       "required": [
         "type",
@@ -1211,7 +1209,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "場所備考",
+      "description": "前項の補足情報を記入します。例えば”内壁”の部位情報で、前項の値が[“校舎”, “2F”,“1年C組”]である時に、更に南側の内壁である事を明示したい場合は“南側”などと記入します。"
     }
   },
   "required": [

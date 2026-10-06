@@ -47,8 +47,6 @@
       "title": "作業タイプ"
     },
     "refProcedure": {
-      "description": "この観測活動が基づく「[観測手順 (Procedure)](https://ppp-database.org/spec/datamodel/Procedure/)」のIDです。「観測手順」で定義した「手順ID」です。手順に基づく観測活動の場合は必須です。",
-      "title": "手順ID",
       "type": "object",
       "required": [
         "type",
@@ -64,11 +62,11 @@
           "x-refType": "Procedure"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "この観測活動が基づく「[観測手順 (Procedure)](https://ppp-database.org/spec/datamodel/Procedure/)」のIDです。「観測手順」で定義した「手順ID」です。手順に基づく観測活動の場合は必須です。",
+      "title": "手順ID"
     },
     "name": {
-      "description": "「[観測手順 (Procedure)](https://ppp-database.org/spec/datamodel/Procedure/)」に基づく場合は「観測手順」内の「作業項目 (ProcedureSteps)」の各ステップで定義した「作業名」です。手順に基づく作業の場合は、手順IDとこの作業名またはステップ番号で作業を特定できるため、どちらかは必須です。尚、ステップ番号で識別する場合も作業名を付与する事を推奨します。",
-      "title": "作業名",
       "type": "object",
       "required": [
         "type",
@@ -82,11 +80,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "「[観測手順 (Procedure)](https://ppp-database.org/spec/datamodel/Procedure/)」に基づく場合は「観測手順」内の「作業項目 (ProcedureSteps)」の各ステップで定義した「作業名」です。手順に基づく作業の場合は、手順IDとこの作業名またはステップ番号で作業を特定できるため、どちらかは必須です。尚、ステップ番号で識別する場合も作業名を付与する事を推奨します。",
+      "title": "作業名"
     },
     "stepNumber": {
-      "description": "「[観測手順 (Procedure)](https://ppp-database.org/spec/datamodel/Procedure/)」に基づく場合は「観測手順 (Procedure)」内の「作業指示 (ProcedureSteps)」で定義した「ステップ番号」です。",
-      "title": "ステップ番号",
       "type": "object",
       "required": [
         "type",
@@ -100,11 +98,11 @@
           "type": "number"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "「[観測手順 (Procedure)](https://ppp-database.org/spec/datamodel/Procedure/)」に基づく場合は「観測手順 (Procedure)」内の「作業指示 (ProcedureSteps)」で定義した「ステップ番号」です。",
+      "title": "ステップ番号"
     },
     "description": {
-      "description": "この観測活動に関する概要説明です。",
-      "title": "説明",
       "type": "object",
       "required": [
         "type",
@@ -118,7 +116,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "この観測活動に関する概要説明です。",
+      "title": "説明"
     },
     "performedAt": {
       "oneOf": [
@@ -137,11 +137,12 @@
               "format": "date-time"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "観測活動を実施した日時を単一のDateTimeで指定します"
         },
         {
           "type": "object",
-          "description": "Standard NGSI Array Attribute for a DateTime range",
+          "description": "開始と終了を明示する場合、2項目のArrayで開始日時・終了日時の順番で指定します",
           "required": [
             "type",
             "value"
@@ -167,8 +168,6 @@
       "title": "実施日時"
     },
     "operator": {
-      "description": "実施主体を区別するための情報です。データを流通する観点から個人名は望ましくありません。",
-      "title": "実施者",
       "type": "object",
       "required": [
         "type",
@@ -182,11 +181,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "実施主体を区別するための情報です。データを流通する観点から個人名は望ましくありません。",
+      "title": "実施者"
     },
     "refFeatureOfInterest": {
-      "description": "観測対象の「設備」「部位」「備品」をリンクするためのそれぞれのIDです。",
-      "title": "観測対象",
       "type": "object",
       "required": [
         "type",
@@ -204,7 +203,9 @@
           ]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "観測対象の「設備」「部位」「備品」をリンクするためのそれぞれのIDです。",
+      "title": "観測対象"
     },
     "results": {
       "type": "object",

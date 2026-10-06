@@ -74,9 +74,16 @@
     [
       "座標",
       "location",
-      "[Point](https://ppp-database.org/spec/parts/Point/) / [Polygon](https://ppp-database.org/spec/parts/Polygon/)",
+      "[Point](https://ppp-database.org/spec/parts/Point/)",
       "1",
-      "土地の座標点を登録します (注1)。代表点などの点の座標を登録する場合はPoint形式で、多角形で土地の形状を登録する場合はPolygon形式で登録します。飛び地を表現するにはMultiPoligon形式を追加定義する必要があります。必要な場合は事務局に連絡してください。"
+      "代表点などの点の座標をGeoJSON Point形式で登録します"
+    ],
+    [
+      "座標",
+      "location",
+      "[Polygon](https://ppp-database.org/spec/parts/Polygon/)",
+      "1",
+      "多角形で土地の形状をGeoJSON Polygon形式で登録します。飛び地の表現にはMultiPolygon形式の追加定義が必要です"
     ],
     [
       "備考",

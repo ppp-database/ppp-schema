@@ -331,24 +331,33 @@ def build_table(schema: dict, model: str) -> dict:
     for attr_name, prop_schema in schema.get("properties", {}).items():
         title = prop_schema.get("title", "") or "-"
         description = prop_schema.get("description", "")
-        value_schema = None
 
         if attr_name == "id":
-            ngsi_type, occurrence = linkify_type("Id"), "1"
+            rows.append([title, attr_name, linkify_type("Id"), "1", description])
         elif attr_name == "type":
-            ngsi_type, occurrence = "Text", "1"  # /spec/parts/type/ は存在しないためリンクなし
+            rows.append([title, attr_name, "Text", "1", description])  # /spec/parts/type/ は存在しないためリンクなし
         else:
-            ngsi_type, occurrence, value_schema, raw_type = infer_type_and_occurrence(prop_schema)
-            if raw_type in PART_LINKS:
-                # 部品ページで説明済みの型(PostalAddress等)は中身を展開しない
-                value_schema = None
-
-        rows.append([title, attr_name, ngsi_type, occurrence, description])
-
-        if value_schema is not None:
-            _, _, children = analyze_nested(value_schema)
-            for child_name, child_schema in children:
-                rows.extend(render_field(child_name, child_schema, depth=1))
+            merged_prop = merge_allof(prop_schema)
+            if "oneOf" in merged_prop and "properties" not in merged_prop:
+                # 属性レベルのoneOf: variantごとに独立した行を生成する
+                for variant in merged_prop["oneOf"]:
+                    v_type, v_occ, v_value_schema, v_raw_type = infer_type_and_occurrence(variant)
+                    v_desc = variant.get("description", "")
+                    rows.append([title, attr_name, v_type, v_occ, v_desc])
+                    if v_value_schema is not None and v_raw_type not in PART_LINKS:
+                        _, _, children = analyze_nested(v_value_schema)
+                        for child_name, child_schema in children:
+                            rows.extend(render_field(child_name, child_schema, depth=1))
+            else:
+                ngsi_type, occurrence, value_schema, raw_type = infer_type_and_occurrence(prop_schema)
+                if raw_type in PART_LINKS:
+                    # 部品ページで説明済みの型(PostalAddress等)は中身を展開しない
+                    value_schema = None
+                rows.append([title, attr_name, ngsi_type, occurrence, description])
+                if value_schema is not None:
+                    _, _, children = analyze_nested(value_schema)
+                    for child_name, child_schema in children:
+                        rows.extend(render_field(child_name, child_schema, depth=1))
 
     return {"model": model, "columns": COLUMNS, "rows": rows}
 

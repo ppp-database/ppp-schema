@@ -21,8 +21,6 @@
       "description": "必ず“Procedure”の文字列でなくてはならない決まりです。NGSI V2に準拠しない場合は不要です。"
     },
     "name": {
-      "description": "この手順が示す作業の名称です。必須項目ではありませんが、人的作業を伴う場合は名称を付与する事を推奨します。",
-      "title": "手順名",
       "type": "object",
       "required": [
         "type",
@@ -36,11 +34,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "この手順が示す作業の名称です。必須項目ではありませんが、人的作業を伴う場合は名称を付与する事を推奨します。",
+      "title": "手順名"
     },
     "description": {
-      "description": "この手順に関する概要説明です。",
-      "title": "説明",
       "type": "object",
       "required": [
         "type",
@@ -54,11 +52,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "この手順に関する概要説明です。",
+      "title": "説明"
     },
     "refFacility": {
-      "description": "この手順の対象となる施設を識別するためのIDです。手順が多数ある際の絞り込みなどに用いる情報です。",
-      "title": "施設ID",
       "type": "object",
       "required": [
         "type",
@@ -74,11 +72,11 @@
           "x-refType": "Facility"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": "この手順の対象となる施設を識別するためのIDです。手順が多数ある際の絞り込みなどに用いる情報です。",
+      "title": "施設ID"
     },
     "steps": {
-      "description": "「[作業指示(ProcedureStep)](https://ppp-database.org/spec/parts/ProcedureStep/)」を要素とするArrayです。出来る限り実際の手順の順序に合わせて登録する事を推奨します。",
-      "title": "作業項目",
       "type": "object",
       "required": [
         "type",
@@ -291,7 +289,9 @@
             ]
           }
         }
-      }
+      },
+      "description": "「[作業指示(ProcedureStep)](https://ppp-database.org/spec/parts/ProcedureStep/)」を要素とするArrayです。出来る限り実際の手順の順序に合わせて登録する事を推奨します。",
+      "title": "作業項目"
     }
   },
   "x-lookups": {

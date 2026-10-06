@@ -14,8 +14,6 @@
       "description": "必ず“Report”の文字列でなくてはならない決まりです。NGSI V2に準拠しない場合は不要です。"
     },
     "timestamp": {
-      "title": "報告日",
-      "description": "報告日を登録します。",
       "type": "object",
       "required": [
         "type",
@@ -30,7 +28,9 @@
           "format": "date"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "報告日",
+      "description": "報告日を登録します。"
     },
     "category": {
       "allOf": [
@@ -96,10 +96,12 @@
               "format": "date"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "description": "点検等の実施日を単一の日付で指定します"
         },
         {
           "type": "object",
+          "description": "実施日が期間に渡る場合、開始日と終了日をArray形式の[date, date]で指定します",
           "properties": {
             "type": {
               "const": "Array"
@@ -132,8 +134,6 @@
       "title": "実施日"
     },
     "operationName": {
-      "title": "作業名",
-      "description": "「報告書名称」の補足情報です。例えば、報告書名称を“不具合報告”とし作業名を“巡回点検”とするなど。",
       "type": "object",
       "required": [
         "type",
@@ -147,11 +147,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "作業名",
+      "description": "「報告書名称」の補足情報です。例えば、報告書名称を“不具合報告”とし作業名を“巡回点検”とするなど。"
     },
     "refSubmitter": {
-      "title": "報告者",
-      "description": "報告者の法人に対するリンク。特定行政庁や自治体等に提出する公的な報告書など作成する場合は、その報告書の届出者/報告者の所属法人名や連絡先を取り出すために用います。",
       "type": "object",
       "required": [
         "type",
@@ -167,11 +167,11 @@
           "x-refType": "Organization"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "報告者",
+      "description": "報告者の法人に対するリンク。特定行政庁や自治体等に提出する公的な報告書など作成する場合は、その報告書の届出者/報告者の所属法人名や連絡先を取り出すために用います。"
     },
     "inspector": {
-      "title": "調査者",
-      "description": "12条点検の報告における、調査者や検査者の法人に対するリンクを登録します。但し、本項目は統計分析やオープンデータに適さない可能性がありますので、蓄積するデータの目的に従って登録の要否を判断する必要があります。",
       "type": "object",
       "properties": {
         "type": {
@@ -187,11 +187,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "調査者",
+      "description": "12条点検の報告における、調査者や検査者の法人に対するリンクを登録します。但し、本項目は統計分析やオープンデータに適さない可能性がありますので、蓄積するデータの目的に従って登録の要否を判断する必要があります。"
     },
     "reportParent": {
-      "title": "親報告",
-      "description": "12条点検の報告において、建物が複数の建築物(棟)から構成される場合、建築物の報告から建物の報告に対するリンクを登録します。",
       "type": "object",
       "required": [
         "type",
@@ -207,11 +207,11 @@
           "x-refType": "Report"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "親報告",
+      "description": "12条点検の報告において、建物が複数の建築物(棟)から構成される場合、建築物の報告から建物の報告に対するリンクを登録します。"
     },
     "refTarget": {
-      "title": "建物ID",
-      "description": "定期検査や不具合報告などにおいて、対象建物、建築物(棟)、設備、および部位へのリンク。一般的に、施設の寿命に比べて建物等の物理的な実体を持つモノの寿命は短いため、この情報が無いと対象施設や設備が現在も存在するのかどうかなどの「状態(status)」が確認できません。",
       "type": "object",
       "required": [
         "type",
@@ -230,11 +230,11 @@
           ]
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "建物ID",
+      "description": "定期検査や不具合報告などにおいて、対象建物、建築物(棟)、設備、および部位へのリンク。一般的に、施設の寿命に比べて建物等の物理的な実体を持つモノの寿命は短いため、この情報が無いと対象施設や設備が現在も存在するのかどうかなどの「状態(status)」が確認できません。"
     },
     "refFacility": {
-      "title": "施設ID",
-      "description": "不具合の報告などにおいて、報告対象の施設へのリンクです。施設管理の管理単位が施設の場合に用います。",
       "type": "object",
       "required": [
         "type",
@@ -250,11 +250,11 @@
           "x-refType": "Facility"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "施設ID",
+      "description": "不具合の報告などにおいて、報告対象の施設へのリンクです。施設管理の管理単位が施設の場合に用います。"
     },
     "refComplaint": {
-      "title": "案件ID",
-      "description": "本報告が関係する「案件」へのリンク。複数の案件がある場合はリストで登録する。検査の結果不具合が見つからなかった場合にも本データモデルを登録するかどうかは運用に依存するが、登録する場合は本Attributeを設定しないか、不具合現象(phenomenonのcategory)に“良好”を登録した案件 (Complaint) をリンクする。「報告」と「案件」の関係の例については、[包括施設管理における使い方(6/7)](https://ppp-database.org/howtouse/tutorial2-6/)も参考にしてください。",
       "type": "object",
       "properties": {
         "type": {
@@ -270,11 +270,11 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "案件ID",
+      "description": "本報告が関係する「案件」へのリンク。複数の案件がある場合はリストで登録する。検査の結果不具合が見つからなかった場合にも本データモデルを登録するかどうかは運用に依存するが、登録する場合は本Attributeを設定しないか、不具合現象(phenomenonのcategory)に“良好”を登録した案件 (Complaint) をリンクする。「報告」と「案件」の関係の例については、[包括施設管理における使い方(6/7)](https://ppp-database.org/howtouse/tutorial2-6/)も参考にしてください。"
     },
     "equipment": {
-      "title": "対象設備",
-      "description": "12条点検における検査対象の建築設備をリスト形式で登録します。登録する用語は“換気設備”、“排煙設備”、“非常用の照明装置”、および“給水設備及び排水設備”です。",
       "type": "object",
       "properties": {
         "type": {
@@ -290,7 +290,9 @@
       "required": [
         "type",
         "value"
-      ]
+      ],
+      "title": "対象設備",
+      "description": "12条点検における検査対象の建築設備をリスト形式で登録します。登録する用語は“換気設備”、“排煙設備”、“非常用の照明装置”、および“給水設備及び排水設備”です。"
     },
     "damageControl": {
       "allOf": [
@@ -381,8 +383,6 @@
       "title": "写真"
     },
     "request": {
-      "title": "要望",
-      "description": "職員などからの要望事項です。修繕の期限などの条件がある場合は記述します。",
       "type": "object",
       "required": [
         "type",
@@ -396,11 +396,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "要望",
+      "description": "職員などからの要望事項です。修繕の期限などの条件がある場合は記述します。"
     },
     "remarks": {
-      "title": "備考",
-      "description": "備考を登録します。",
       "type": "object",
       "required": [
         "type",
@@ -414,11 +414,11 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "備考",
+      "description": "備考を登録します。"
     },
     "opinion": {
-      "title": "所見",
-      "description": "担当者の所見を登録します。",
       "type": "object",
       "required": [
         "type",
@@ -432,7 +432,9 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "title": "所見",
+      "description": "担当者の所見を登録します。"
     },
     "document": {
       "type": "object",

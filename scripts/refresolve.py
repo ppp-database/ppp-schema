@@ -62,9 +62,12 @@ def expand_schema(schema, current_file: Path, cache: dict = None, visited: froze
         if schema.keys() == {"$ref"}:
             return target
 
-        # $refと同居する他キーがある場合、stos.pyと同じく参照先の値を優先してマージする
-        merged = {k: v for k, v in schema.items() if k != "$ref"}
-        merged.update(target if isinstance(target, dict) else {})
+        # $refと同居する他キーがある場合、兄弟キーが参照先を上書きする(JSON Schema sibling semantics)
+        if isinstance(target, dict):
+            merged = dict(target)
+            merged.update({k: v for k, v in schema.items() if k != "$ref"})
+        else:
+            merged = {k: v for k, v in schema.items() if k != "$ref"}
         return expand_schema(merged, current_file, cache, next_visited)
 
     return {k: expand_schema(v, current_file, cache, visited) for k, v in schema.items()}
