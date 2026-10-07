@@ -8,7 +8,7 @@
     "type",
     "title",
     "datasetSpec",
-    "entityType",
+    "sources",
     "refCreator"
   ],
   "properties": {
@@ -39,24 +39,6 @@
       "additionalProperties": false,
       "title": "タイトル",
       "description": "データセットの名称です。例: “○○市公共施設一覧”"
-    },
-    "subtitle": {
-      "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
-      "properties": {
-        "type": {
-          "const": "Text"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
-      "title": "サブタイトル",
-      "description": "データセットのサブタイトルです。"
     },
     "abstract": {
       "type": "object",
@@ -139,24 +121,6 @@
       "title": "ユニバーサルメニュー",
       "description": "ユニバーサルメニューによる分類です。"
     },
-    "version": {
-      "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
-      "properties": {
-        "type": {
-          "const": "Text"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
-      "title": "バージョン",
-      "description": "データセットのバージョン情報です。自治体標準オープンデータセットのフォーマットを使用した場合はA〇.〇形式で管理します。"
-    },
     "language": {
       "type": "object",
       "required": [
@@ -178,42 +142,6 @@
       "title": "言語",
       "description": "データセットが記述されている言語です。ISO 639-1に準拠した2文字コードで記載します（例: “ja”、“en”）。"
     },
-    "landingPage": {
-      "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
-      "properties": {
-        "type": {
-          "const": "Text"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
-      "title": "公開URL",
-      "description": "データセットが公開されているWebページのURLです。"
-    },
-    "accrualPeriodicity": {
-      "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
-      "properties": {
-        "type": {
-          "const": "Text"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
-      "title": "更新頻度",
-      "description": "データセットの更新頻度です。"
-    },
     "conformsTo": {
       "type": "object",
       "required": [
@@ -231,27 +159,6 @@
       "additionalProperties": false,
       "title": "準拠標準",
       "description": "データセットが準拠する標準です。自治体標準オープンデータセットに準拠している場合は“自治体標準オープンデータセット”と入力します。"
-    },
-    "relatedDocument": {
-      "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
-      "properties": {
-        "type": {
-          "const": "Array"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "additionalProperties": false,
-      "title": "関連ドキュメント",
-      "description": "データセットに関する情報を持つドキュメントへのリンク（URL）のリストです。"
     },
     "spatial": {
       "type": "object",
@@ -273,24 +180,6 @@
       "additionalProperties": false,
       "title": "対象地域",
       "description": "データセットが対象とする地域を示すメモです。このデータセットが実際にカバーする地理的範囲を記述します。エンティティの収集条件ではありません。"
-    },
-    "temporal": {
-      "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
-      "properties": {
-        "type": {
-          "const": "Text"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
-      "title": "対象期間",
-      "description": "データセットが対象とする期間を示すメモです。入力形式: 開始年月日/終了年月日（YYYY-MM-DD/YYYY-MM-DD）。エンティティの収集条件ではありません。"
     },
     "refCreator": {
       "type": "object",
@@ -368,25 +257,7 @@
       "title": "データセット仕様",
       "description": "出力する公開フォーマット仕様を名前空間付きで指定します。例: “ODS:01.公共施設一覧”、“ODS:07.公衆無線LANアクセスポイント一覧”、“AreaData:公共施設”。JtoCがこの値を参照してマッピング定義を選択します。"
     },
-    "entityType": {
-      "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
-      "properties": {
-        "type": {
-          "const": "Text"
-        },
-        "value": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
-      "title": "対象エンティティ種別",
-      "description": "収集対象のNGSI V2エンティティのtype値です。例: “Facility”、“Device”。JtoCはこのEntity typeのエンティティを収集してCSVに変換します。"
-    },
-    "filterCriteria": {
+    "sources": {
       "type": "object",
       "required": [
         "type",
@@ -398,32 +269,61 @@
         },
         "value": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "type": "object",
             "required": [
-              "path",
-              "value"
+              "entityType"
             ],
             "properties": {
-              "path": {
+              "entityType": {
                 "type": "string",
-                "title": "属性パス",
-                "description": "対象エンティティの属性名、またはRelationshipを辿った先の属性名をドット区切りで指定します。例: “status”、“refDepartment.departmentOf.localGovernmentCode”"
+                "title": "対象エンティティ種別",
+                "description": "収集対象のNGSI V2エンティティのtype値です。例: “Facility”、“Device”"
               },
-              "op": {
-                "type": "string",
-                "enum": [
-                  "==",
-                  "!=",
-                  "in"
-                ],
-                "default": "==",
-                "title": "演算子",
-                "description": "比較演算子です。省略時は“==”とみなします。“in”を指定した場合はvalueを配列にします。"
+              "filterCriteria": {
+                "type": "array",
+                "title": "選択条件",
+                "description": "このエンティティ種別に対する絞り込み条件です。各条件はANDで結合されます。省略時はentityTypeの全エンティティを収集します。refEntitiesが設定されている場合は無視されます。",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "title": "属性パス",
+                      "description": "対象エンティティの属性名、またはRelationshipを辿った先の属性名をドット区切りで指定します。例: “status”、“refDepartment.departmentOf.localGovernmentCode”"
+                    },
+                    "op": {
+                      "type": "string",
+                      "enum": [
+                        "==",
+                        "!=",
+                        "in"
+                      ],
+                      "default": "==",
+                      "title": "演算子",
+                      "description": "比較演算子です。省略時は“==”とみなします。“in”を指定した場合はvalueを配列にします。"
+                    },
+                    "value": {
+                      "title": "比較値",
+                      "description": "比較する値です。“op”が“in”の場合は配列を指定します。"
+                    }
+                  },
+                  "additionalProperties": false
+                }
               },
-              "value": {
-                "title": "比較値",
-                "description": "比較する値です。“op”が“in”の場合は配列を指定します。"
+              "refEntities": {
+                "type": "array",
+                "title": "対象エンティティ一覧",
+                "description": "このエンティティ種別の収集対象IDをurn:ngsi-ld:...形式で静的に列挙します。設定されている場合はfilterCriteriaより優先されます。",
+                "items": {
+                  "type": "string",
+                  "pattern": "^urn:ngsi-ld:.*"
+                }
               }
             },
             "additionalProperties": false
@@ -431,30 +331,8 @@
         }
       },
       "additionalProperties": false,
-      "title": "選択条件",
-      "description": "収集対象エンティティの絞り込み条件です。各条件はANDで結合されます。省略時はentityTypeの全エンティティを収集します。refEntitiesが設定されている場合は無視されます。"
-    },
-    "refEntities": {
-      "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
-      "properties": {
-        "type": {
-          "const": "Array"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^urn:ngsi-ld:.*"
-          }
-        }
-      },
-      "additionalProperties": false,
-      "title": "対象エンティティ一覧",
-      "description": "収集対象エンティティのID（urn:ngsi-ld:...形式）を静的に列挙します。設定されている場合はfilterCriteriaより優先されます。"
+      "title": "収集元",
+      "description": "収集対象エンティティの種別と絞り込み条件を定義します。複数のエンティティ種別を列挙できます。各エンティティ種別ごとに独立した条件を指定できます。"
     }
   }
 }
